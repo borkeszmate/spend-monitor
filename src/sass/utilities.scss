@@ -1,0 +1,150 @@
+/*LAYOUT SHORTCUTS*/
+.row{
+ width: 90%;
+ margin: 4rem auto;
+}
+
+.full-row{
+ width: 100%;
+ margin: 4rem auto;
+}
+
+.md-row{
+ width: 70%;
+ margin: 4rem auto;
+ @media only screen and (max-width: 50em) {
+  width: 95%;
+  margin: 2rem auto;
+ }
+}
+
+/*BTN SHORTCUTS*/
+.btn-primary{
+ padding: 1rem 2rem;
+ background-color: $color-primary;
+ text-transform: uppercase;
+ text-decoration: none;
+ color:white;
+ border: 2px solid  transparent;
+ transition: all .3s;
+  @media only screen and (max-width: 30em) {
+  display: block;      
+  text-align: center;
+  margin: .4rem 0;
+  }    
+}
+.btn-primary:hover{
+ padding: 1rem 2rem;
+ background-color:transparent;
+ text-transform: uppercase;
+ text-decoration: none;
+ color: $color-primary;
+ border: 2px solid  $color-primary;
+ transition: all .3s;
+}
+
+
+.btn-primary-outline{
+ padding: 1rem 2rem;
+ background-color:white;
+ text-transform: uppercase;
+ text-decoration: none;
+ color: $color-primary;
+ border: 2px solid  $color-primary;
+ transition: all .3s;
+  @media only screen and (max-width: 30em) {
+  display: block;      
+  text-align: center;
+  margin: .4rem 0;
+  }    
+}
+
+.btn-primary-outline:hover{
+ padding: 1rem 2rem;
+ background-color: $color-primary;
+ text-transform: uppercase;
+ text-decoration: none;
+ color:white;
+ border: 2px solid  transparent;
+ transition: all .3s;
+}
+
+.btn-secondary{
+ padding: 1rem 2rem;
+ background-color: black;
+ text-transform: uppercase;
+ text-decoration: none;
+ color:white;
+ border: 2px solid  transparent;
+ transition: all .3s;
+  @media only screen and (max-width: 30em) {
+  display: block;      
+  text-align: center;
+  margin: .4rem 0;
+  }    
+}
+.btn-secondary:hover{
+ padding: 1rem 2rem;
+ background-color:transparent;
+ text-transform: uppercase;
+ text-decoration: none;
+ color: black;
+ border: 2px solid  black;
+ transition: all .3s;
+}
+
+
+.btn-secondary-outline{
+ padding: 1rem 2rem;
+ background-color:white;
+ text-transform: uppercase;
+ text-decoration: none;
+ color: black;
+ border: 2px solid  black;
+ transition: all .3s;
+  @media only screen and (max-width: 30em) {
+  display: block;      
+  text-align: center;
+  margin: .4rem 0;
+  }    
+}
+
+.btn-secondary-outline:hover{
+ padding: 1rem 2rem;
+ background-color: black;
+ text-transform: uppercase;
+ text-decoration: none;
+ color:white;
+ border: 2px solid  transparent;
+ transition: all .3s;
+}
+
+
+
+
+.spacing{
+ width: 70%;
+ height: 5rem;
+ margin: 5rem auto;
+ border-top: solid .2rem $color-gray-4;
+ // background-color: red;
+}
+
+.small-display-only{
+display: none;
+@media only screen and (max-width: 40em) {
+   display: block;
+ } 
+}
+
+.medium-display-none{
+  @media only screen and (max-width: 60em) {
+   display: none !important;
+  }
+ } 
+
+.small-display-none{
+ @media only screen and (max-width: 40em) {
+   display: none;
+ } 
+}
