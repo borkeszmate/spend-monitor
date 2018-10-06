@@ -25,24 +25,38 @@
  text-transform: uppercase;
  text-decoration: none;
  color:white;
- border: 2px solid  transparent;
+ border: 2px solid  white;
  transition: all .3s;
   @media only screen and (max-width: 30em) {
   display: block;      
   text-align: center;
   margin: .4rem 0;
+  cursor: pointer;
   }    
 }
-.btn-primary:hover{
+// .btn-primary:hover{
+//  padding: 1rem 2rem;
+//  background-color:transparent;
+//  text-transform: uppercase;
+//  text-decoration: none;
+//  color: $color-primary;
+//  border: 2px solid  $color-primary;
+//  transition: all .3s;
+// }
+
+.btn-primary:disabled,
+.btn-primary-outline:disabled,
+.btn-primary-outline:hover:disabled
+ {
  padding: 1rem 2rem;
  background-color:transparent;
  text-transform: uppercase;
  text-decoration: none;
- color: $color-primary;
- border: 2px solid  $color-primary;
+ color: $color-gray-3;
+ background-color: $color-gray-4;
+ border: 2px solid  $color-gray-4;
  transition: all .3s;
 }
-
 
 .btn-primary-outline{
  padding: 1rem 2rem;

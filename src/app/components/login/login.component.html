@@ -1,22 +1,57 @@
 
 <div class="row">
-  <section class="register">
 
-    <form [formGroup]="registerForm" (ngSubmit)="OnSubmit()" class="register__form" >
-      <label for="email"></label>
-      <input name="email" type="text" placeholder="Email address" formControlName="email" class="register__form__input">
+
+
+  <!-- Register form -->
+  <section class="register-login" *ngIf="!isLogin">
+
+    <form [formGroup]="registerForm" (ngSubmit)="registerSubmit()" class="register-login__form" >
       
-      <label for="password"></label>
-      <input name="password" type="password" placeholder="Password" formControlName="password" class="register__form__input">
+      <input name="email" type="text" placeholder="Email address" formControlName="email" class="register-login__form__input">
       
-      <label for="confirm_password"></label>
-      <input name="confirm_password" type="password" placeholder="Password" formControlName="confirm_password" class="register__form__input">
+      
+      <input name="password" type="password" placeholder="Password" formControlName="password" class="register-login__form__input">
+      
+      
+      <input name="confirm_password" type="password" placeholder="Password" formControlName="confirm_password" class="register-login__form__input">
 
-      <div class="register__form__btn-container">
-        <input type="submit" value="register" class="btn-primary">
-        <button class="btn-secondary">Login</button>
+      <div class="register-login__form__btn-container">
+        <input type="submit" value="register" class="btn-primary"
+        [disabled]="!registerForm.valid">
+      </div>
 
+      <div class="register-login__form__loginChange">
+        <p>Already registered? <span><a class="register-login__form__loginChange__loginLink" (click)="loginRegisterToggler()">Click here </a></span> to log in!</p> 
+      </div>  
+    </form>
+
+  </section>
+
+
+
+
+  <!-- Login form -->
+  <section class="register-login" *ngIf="isLogin">
+  
+    <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()" class="register-login__form">
+  
+      <input name="email" type="text" placeholder="Email address" formControlName="email" class="register-login__form__input">
+    
+      <input name="password" type="password" placeholder="Password" formControlName="password" class="register-login__form__input">
+      
+      <div class="register-login__form__btn-container">
+        <input type="submit" value="register" class="btn-primary" [disabled]="!loginForm.valid">
+      </div>
+  
+      <div class="register-login__form__loginChange">
+        <p>Not registered yet? <span><a class="register-login__form__loginChange__loginLink" (click)="loginRegisterToggler()">Click here </a></span> to
+          register!</p>
       </div>
     </form>
+  
   </section>
+  
+
+
 </div>
