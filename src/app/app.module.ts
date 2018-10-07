@@ -17,6 +17,20 @@ import { SpendsFeedComponent } from './components/spends-feed/spends-feed.compon
 import { AuthService } from './services/auth.service';
 import { PostsServiceService } from './services/posts-service.service';
 
+// Router
+import { Routes, RouterModule } from '@angular/router';
+
+// Guard
+import { AuthGuard } from './auth/auth.guard';
+
+const routes: Routes = [
+  { path: '', component: LoginComponent },
+  {  path: 'spends',
+     component: SpendsFeedComponent
+    //  canActivate: [AuthGuard],
+   },
+];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +42,8 @@ import { PostsServiceService } from './services/posts-service.service';
     BrowserModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [
     AuthService,

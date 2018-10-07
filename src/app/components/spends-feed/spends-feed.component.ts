@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-spends-feed',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SpendsFeedComponent implements OnInit {
 
-  constructor() { }
+  constructor(private Auth: AuthService) { }
+
+  loggedIn;
 
   ngOnInit() {
+    // console.log(this.Auth.isAuthenticated);
+
+     console.log(this.Auth.getToken());
+
+
   }
 
 }
