@@ -21,13 +21,12 @@ import { PostsServiceService } from './services/posts-service.service';
 import { Routes, RouterModule } from '@angular/router';
 
 // Guard
-import { AuthGuard } from './auth/auth.guard';
+
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
-  {  path: 'spends',
+  { path: 'login', component: LoginComponent },
+  {  path: '',
      component: SpendsFeedComponent
-    //  canActivate: [AuthGuard],
    },
 ];
 

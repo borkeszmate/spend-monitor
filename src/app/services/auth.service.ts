@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-
-import { Observable, of } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 
 
@@ -16,7 +15,8 @@ export class AuthService {
   constructor(public afAuth: AngularFireAuth, private router: Router) { }
 
   token: string;
-  isAuthenticated;
+  isLoggedIn:boolean;
+
 
 
 
@@ -26,44 +26,51 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-      this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then(response => {
-        this.afAuth.idTokenResult.subscribe( (result => {
-          this.token = result.token;
-          console.log(this.token);
-          this.isAuthenticated = true;
-          this.router.navigate(['spends']);
-
-        }));
-      })
-      .catch(err => console.log(err));
-
-
+    this.afAuth.auth.signInWithEmailAndPassword(email, password)
+    .then(
+      response => {
+        //  console.log(response);
+         this.afAuth.auth.currentUser.getIdToken()
+         .then(token => {
+           this.token = token;
+          //  console.log(this.token);
+           this.router.navigate(['']);
+         });
+        }
+    )
   }
+  
 
   getToken() {
 
-
-return  this.afAuth.idTokenResult.subscribe(
-      (response) => {
-        if (response != null) {
-          console.log('bejelentkezve');
-          // this.isAuthenticated = true;
-          this.isAuthenticated = true;
-
-        } else {
-          console.log('kurvára nincs bejelentkezve');
-          // this.isAuthenticated = false;
-          this.isAuthenticated = false;
-        }
-      }
-
+   return this.afAuth.auth.currentUser.getIdToken()
+      .then(
+        token =>{this.token}
       );
+
 
   }
 
-  getCredentials() {
-    this.afAuth.idTokenResult.toPromise();
+  checkIfLoggedIn() {
+
+   const subscription=   this.afAuth.authState.subscribe(response => { 
+    
+    const observer = response;
+    //  console.log(authState);
+     
+       if (observer != null) {
+        //  console.log('loggedin');
+         
+        return true;
+         
+       } else {
+        //  console.log('off');
+         this.router.navigate(['login']);
+         return false;
+       }
+       
+     });
+     
   }
 
 
