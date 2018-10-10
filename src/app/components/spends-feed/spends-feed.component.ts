@@ -22,4 +22,8 @@ this.Auth.checkIfLoggedIn();
 
   }
 
+  signOut() {
+    this.Auth.signOut();
+  }
+
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from '../../services/auth.service';
+import { PasswordValidation } from '../../validators/password.validator'
 
 @Component({
   selector: 'app-login',
@@ -38,6 +39,9 @@ export class LoginComponent implements OnInit {
       password: new FormControl('', [Validators.required] ),
       confirm_password: new FormControl('', [Validators.required]),
 
+    },
+    {
+      validators: PasswordValidation.MatchPassword 
     });
 
 
@@ -46,7 +50,6 @@ export class LoginComponent implements OnInit {
       password: new FormControl('', [Validators.required])
     });
 
-    console.log(this.Auth.isAuthenticated);
 
   }
 
@@ -63,7 +66,8 @@ export class LoginComponent implements OnInit {
     this.registerEmail = this.registerForm.value.email;
     this.registerPassword = this.registerForm.value.password;
 
-    this.Auth.register(this.registerEmail, this.registerPassword).then(response => console.log(response))
+    this.Auth.register(this.registerEmail, this.registerPassword).then(response => 
+      this.Auth.login(this.registerEmail, this.registerPassword))
     .catch(err => console.log(err));
 
   }
