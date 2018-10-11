@@ -1,11 +1,17 @@
 
-<div class="row">
+<div class="container">
 
-
-
+  
+  
   <!-- Register form -->
   <section class="register-login" *ngIf="!isLogin">
-
+    
+    <div class="title">
+      <i class="fas fa-file-invoice-dollar"></i>
+      <h1>Spend Monitor</h1>
+      <h2>by Mate BORKESZ</h2>
+    </div>
+    
     <form [formGroup]="registerForm" (ngSubmit)="registerSubmit()" class="register-login__form" >
       
       <input name="email" type="text" placeholder="Email address" formControlName="email" class="register-login__form__input">
@@ -25,7 +31,7 @@
         <p>Already registered? <span><a class="register-login__form__loginChange__loginLink" (click)="loginRegisterToggler()">Click here </a></span> to log in!</p> 
       </div>  
     </form>
-
+    
   </section>
 
 
@@ -33,7 +39,13 @@
 
   <!-- Login form -->
   <section class="register-login" *ngIf="isLogin">
-  
+
+    <div class="title">
+      <i class="fas fa-file-invoice-dollar"></i>
+      <h1>Spend Monitor</h1>
+      <h2>by Mate BORKESZ</h2>
+    </div>
+
     <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()" class="register-login__form">
   
       <input name="email" type="text" placeholder="Email address" formControlName="email" class="register-login__form__input">
