@@ -1,6 +1,5 @@
 export interface Spend {
-  title: string;
-  amount:number;
-  category:string;
-  date:Date;
+  amount: number;
+  date: Date;
+  category: string;
 }

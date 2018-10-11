@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Spend } from '../interfaces/spend';
+
+
 @Injectable({
   providedIn: 'root'
 })
-export class PostsServiceService {
+export class SpendsService {
 
   constructor() { }
-  Spends:Spend[]= [];
-
-
 }

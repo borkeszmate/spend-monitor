@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from '../../services/auth.service';
-import { PasswordValidation } from '../../validators/password.validator'
+import { PasswordValidation } from '../../validators/password.validator';
 
 @Component({
   selector: 'app-login',
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
 
     },
     {
-      validators: PasswordValidation.MatchPassword 
+      validators: PasswordValidation.MatchPassword
     });
 
 
@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
     this.registerEmail = this.registerForm.value.email;
     this.registerPassword = this.registerForm.value.password;
 
-    this.Auth.register(this.registerEmail, this.registerPassword).then(response => 
+    this.Auth.register(this.registerEmail, this.registerPassword).then(response =>
       this.Auth.login(this.registerEmail, this.registerPassword))
     .catch(err => console.log(err));
 

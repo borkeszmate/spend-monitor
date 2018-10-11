@@ -2,12 +2,13 @@
 
 .add-spend{
   position: fixed;
-  top: 90%;
+  bottom: 10%;
   right: 15%;
   width: 8rem;
   height: 8rem;
   background-color: $color-primary;
   border-radius: 50%; 
+  cursor: pointer;
   
 
   &__icon{

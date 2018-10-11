@@ -26,4 +26,8 @@ this.Auth.checkIfLoggedIn();
     this.Auth.signOut();
   }
 
+  addSpendRoute() {
+    this.router.navigate(['add']);
+  }
+
 }

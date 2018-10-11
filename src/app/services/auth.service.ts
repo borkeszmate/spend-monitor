@@ -15,7 +15,7 @@ export class AuthService {
   constructor(public afAuth: AngularFireAuth, private router: Router) { }
 
   token: string;
-  isLoggedIn:boolean;
+  isLoggedIn: boolean;
 
 
 
@@ -37,19 +37,21 @@ export class AuthService {
            this.router.navigate(['']);
          });
         }
-    )
+    );
   }
 
   signOut() {
     this.afAuth.auth.signOut();
   }
-  
+
 
   getToken() {
 
    return this.afAuth.auth.currentUser.getIdToken()
       .then(
-        token =>{this.token}
+        token => {
+          this.token = token;
+        }
       );
 
 
@@ -57,24 +59,24 @@ export class AuthService {
 
   checkIfLoggedIn() {
 
-   const subscription=   this.afAuth.authState.subscribe(response => { 
-    
+   const subscription = this.afAuth.authState.subscribe(response => {
+
     const observer = response;
     //  console.log(authState);
-     
+
        if (observer != null) {
         //  console.log('loggedin');
-         
+
         return true;
-         
+
        } else {
         //  console.log('off');
          this.router.navigate(['login']);
          return false;
        }
-       
+
      });
-     
+
   }
 
 
