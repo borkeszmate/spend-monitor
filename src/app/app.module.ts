@@ -19,6 +19,7 @@ import { PostsServiceService } from './services/posts-service.service';
 
 // Router
 import { Routes, RouterModule } from '@angular/router';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 // Guard
 
@@ -35,7 +36,8 @@ const routes: Routes = [
     AppComponent,
     AdminComponent,
     LoginComponent,
-    SpendsFeedComponent
+    SpendsFeedComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

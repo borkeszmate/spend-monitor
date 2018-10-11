@@ -1,0 +1,49 @@
+
+<div class="opened-navbar" id="open-navbar">
+  <div class="opened-navbar__times" (click)="navClick()">
+    <i class="fas fa-times-circle"></i>
+  </div>
+
+  <div class="opened-navbar__container">
+    <div class="opened-navbar__container__navigation">
+
+      <div class="opened-navbar__container__navigation__menu">
+
+        <ul>
+
+          <li class="opened-navbar__container__navigation__menu__item">
+            <a (click)="signOut()">Sign out</a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+  <section class="nav">
+  
+    <div class="nav__navigation">
+      <ul class="nav__navigation__nav-container">
+
+        
+
+
+        <li class="nav__navigation__nav-container__nav-item">
+          <div class="nav__navigation__nav-container__nav-item__hamburger">
+            <input id="navtoggle" type="checkbox" class="nav__hamburger-menu__checkbox">
+            <label for="navtoggle" (click)="navClick()">
+              <i class="fas fa-bars" id="menuIcon"></i>
+            </label>
+            <div class="nav__navigation__nav-container__nav-item__hamburger__background">
+            </div>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </section>

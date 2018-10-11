@@ -1,0 +1,129 @@
+
+@import '../../../styles.scss';
+
+
+.nav{
+
+
+ background-color: $color-primary-dark;
+
+
+  
+
+  &__navigation{
+   flex:1;
+   display: flex; 
+   justify-content: flex-end;
+   
+    
+   &__nav-container{
+   
+    display: flex;
+    margin: 4rem 2rem;
+    justify-content: flex-end;
+    
+
+
+    &__nav-item{
+     font-size: 2rem;
+     list-style-type: none;
+     margin: 0 5rem;
+
+
+     &__hamburger{
+     
+      
+      padding: .3rem .5rem;
+      cursor: pointer;
+
+
+      input{
+       display: none;
+      list-style: none;
+      }
+
+
+      
+      i{
+        display: inline-block;
+        transition: all .5s;
+        font-size: 4rem;
+        color: white;
+        z-index: 200;
+        cursor: pointer;
+
+      }
+
+     }
+    }
+
+
+
+
+   }
+  }
+
+}
+
+.opened-navbar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 80%;
+  height: 100%;
+  transition: all 1s;
+ 
+  background-color: $color-primary;
+  z-index: 50;
+  overflow-x: hidden;
+
+  &__times{
+    text-align: right;
+    margin: 5rem 5rem;
+    font-size: 3rem;
+    color: white;
+    z-index: 51;
+    cursor: pointer;
+
+  }
+  
+
+  
+  &__container{
+    // position: absolute;
+    // top: 0;
+    // left: 0;
+    // width: 100%;
+    // height: 100%;
+    display: flex;
+    transition: all 1s;
+    align-items: center;
+    justify-content: center;
+    // background-color: yellow;
+    margin-top: 20vh;
+    
+    &__navigation{
+
+
+
+      &__menu{
+        // background-color: pink;
+        &__item{
+          padding: 1rem 0;
+          text-align: center;
+          list-style-type: none;
+          a{
+          color: white;
+          text-transform: uppercase;
+          font-size: 2rem;
+          text-decoration: none;
+          cursor: pointer;
+          }
+        }
+      }
+      
+    }
+
+
+  }
+}

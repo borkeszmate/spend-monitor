@@ -1,0 +1,25 @@
+@import '../../../styles.scss';
+
+.add-spend{
+  position: fixed;
+  top: 90%;
+  right: 15%;
+  width: 8rem;
+  height: 8rem;
+  background-color: $color-primary;
+  border-radius: 50%; 
+  
+
+  &__icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    i{
+      margin-top: 50%;
+      transform: translateY(-50%);
+      font-size: 3rem;
+      color: white;
+    }
+  }
+
+}
