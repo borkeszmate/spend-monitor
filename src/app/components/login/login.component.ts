@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
 
 
-  isLogin = false;
+  isLogin = true;
 
   // Forms
   registerForm: FormGroup;

@@ -1,37 +1,34 @@
 
+<!-- Opened navbar -->
 <div class="opened-navbar" id="open-navbar">
+  <!-- Close icon -->
   <div class="opened-navbar__times" (click)="navClick()">
     <i class="fas fa-times-circle"></i>
   </div>
-
+<!-- Open navigation -->
   <div class="opened-navbar__container">
     <div class="opened-navbar__container__navigation">
-
       <div class="opened-navbar__container__navigation__menu">
-
         <ul>
-
           <li class="opened-navbar__container__navigation__menu__item">
             <a (click)="signOut()">Sign out</a>
           </li>
-
         </ul>
-
       </div>
-
     </div>
   </div>
+
 </div>
 
 
 
   <section class="nav">
-  
+    <div class="nav__logo" [routerLink]="['/']">
+      <i class="fas fa-file-invoice-dollar"></i>
+    </div>
+    
     <div class="nav__navigation">
       <ul class="nav__navigation__nav-container">
-
-        
-
 
         <li class="nav__navigation__nav-container__nav-item">
           <div class="nav__navigation__nav-container__nav-item__hamburger">

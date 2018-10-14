@@ -1,8 +1,41 @@
 <app-navbar></app-navbar>
-
+<!-- Add spend btn -->
 <div class="add-spend" (click)="addSpendRoute()">
   <div class="add-spend__icon">
 
     <i class="fas fa-plus"></i>
   </div>
 </div>
+
+<div class="spinner" *ngIf="!expensesLoaded">
+  <img src="../../../assets/Cube-1s-200px.gif" alt="">
+</div>
+
+<section class="expenses-container" *ngIf="expensesLoaded">
+
+  <div class="expense" *ngFor="let expense of expenses">
+
+    <div class="expense__category">
+      <div class="expense__category__icon">
+        <div class="expense__category__icon__bg">
+          <i class="fas fa-glass-martini"></i>
+        </div>
+      </div>
+      <div class="expense__category__name">
+        <p>{{expense.name}}</p>
+      </div>
+    </div>
+
+    <div class="expense__amount-date">
+      <div class="expense__amount-date__amount">
+        <p>{{expense.amount}}</p>
+      </div>
+
+      <div class="expense__amount-date__date">
+        {{expense.date}}
+      </div>
+    </div>
+  </div>
+
+</section>
+

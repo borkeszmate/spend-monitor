@@ -3,10 +3,19 @@
 
 
 .nav{
+  display: flex;
+  background-color: $color-primary-dark;
 
-
- background-color: $color-primary-dark;
-
+ &__logo{
+   cursor: pointer;
+   display: flex;
+   align-items: center;
+   i{
+     font-size: 6rem;
+     margin-left: 3rem;
+     color:white;
+   }
+ }
 
   
 

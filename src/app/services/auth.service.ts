@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-
-
+import { Observable } from 'rxjs';
+import { SpendsService } from './spends.service';
 
 
 
@@ -12,10 +12,13 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  constructor(public afAuth: AngularFireAuth, private router: Router) { }
+  constructor(
+    public afAuth: AngularFireAuth,
+    private router: Router) {}
 
   token: string;
   isLoggedIn: boolean;
+  userdId: string;
 
 
 
@@ -25,19 +28,29 @@ export class AuthService {
 
   }
 
+  // login(email: string, password: string) {
+  //   this.afAuth.auth.signInWithEmailAndPassword(email, password)
+  //   .then(
+  //     response => {
+  //       //  console.log(response);
+  //        this.afAuth.auth.currentUser.getIdToken()
+  //        .then(token => {
+  //          this.token = token;
+  //         //  console.log(this.token);
+  //          this.router.navigate(['']);
+  //        });
+  //       }
+  //   );
+  // }
+
   login(email: string, password: string) {
     this.afAuth.auth.signInWithEmailAndPassword(email, password)
-    .then(
-      response => {
-        //  console.log(response);
-         this.afAuth.auth.currentUser.getIdToken()
-         .then(token => {
-           this.token = token;
-          //  console.log(this.token);
-           this.router.navigate(['']);
-         });
+      .then(
+        response => {
+         this.userdId = this.afAuth.auth.currentUser.uid;
+              this.router.navigate(['']);
         }
-    );
+      );
   }
 
   signOut() {
@@ -47,15 +60,20 @@ export class AuthService {
 
   getToken() {
 
-   return this.afAuth.auth.currentUser.getIdToken()
-      .then(
-        token => {
-          this.token = token;
-        }
-      );
-
-
+    this.afAuth.authState.subscribe(response => {
+      response.getIdTokenResult().then(token => {
+        this.token = token.token;
+      });
+    });
   }
+
+  getUserId(): Observable<any> {
+   return this.afAuth.authState;
+  }
+
+
+
+
 
   checkIfLoggedIn() {
 
@@ -78,6 +96,8 @@ export class AuthService {
      });
 
   }
+
+
 
 
 }
