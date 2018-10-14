@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from '../../services/auth.service';
 import { PasswordValidation } from '../../validators/password.validator';
-
+import { NotifierService } from 'angular-notifier';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,9 +11,14 @@ import { PasswordValidation } from '../../validators/password.validator';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private Auth: AuthService) { }
+  constructor(
+    private Auth: AuthService,
+    notifierService: NotifierService) {
 
+      this.notifier = notifierService;
+    }
 
+  private readonly notifier: NotifierService;
 
   isLogin = true;
 
@@ -50,7 +55,7 @@ export class LoginComponent implements OnInit {
       password: new FormControl('', [Validators.required])
     });
 
-
+    this.notifier.notify('success', 'You are awesome! I mean it!');
   }
 
   public loginRegisterToggler() {
@@ -86,6 +91,7 @@ export class LoginComponent implements OnInit {
 
 
   }
+
 
 
 
