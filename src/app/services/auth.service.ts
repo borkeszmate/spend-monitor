@@ -44,13 +44,8 @@ export class AuthService {
   // }
 
   login(email: string, password: string) {
-    this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then(
-        response => {
-         this.userdId = this.afAuth.auth.currentUser.uid;
-              this.router.navigate(['']);
-        }
-      );
+  return  this.afAuth.auth.signInWithEmailAndPassword(email, password);
+
   }
 
   signOut() {

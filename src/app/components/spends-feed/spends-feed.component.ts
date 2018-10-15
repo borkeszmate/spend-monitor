@@ -3,7 +3,6 @@ import { AuthService } from '../../services/auth.service';
 import { SpendsService } from '../../services/spends.service';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 
 
 
@@ -53,9 +52,7 @@ export class SpendsFeedComponent implements OnChanges, OnInit, AfterViewInit {
 
 
   getSpends() {
-    this.Auth.getUserId().pipe(
-      map(response => response)
-    )
+    this.Auth.getUserId()
       .subscribe(
         (value) => {
           this.Auth.userdId = value.uid;

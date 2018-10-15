@@ -14,7 +14,8 @@
     
     <form [formGroup]="registerForm" (ngSubmit)="registerSubmit()" class="register-login__form" >
       
-      <input name="email" type="text" placeholder="Email address" formControlName="email" class="register-login__form__input">
+      <input name="email" type="text" placeholder="Email address" formControlName="email" class="register-login__form__input"> 
+      
       
       
       <input name="password" type="password" placeholder="Password" formControlName="password" class="register-login__form__input">
@@ -49,8 +50,13 @@
     <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()" class="register-login__form">
   
       <input name="email" type="text" placeholder="Email address" formControlName="email" class="register-login__form__input">
+      <span *ngIf="loginForm.controls.email?.errors?.required && loginForm.controls.email.touched"
+       class="register-login__form__input__error-msg">Email is required!</span>
+      <span *ngIf="loginForm.controls.email?.errors?.email && loginForm.controls.email.touched" class="register-login__form__input__error-msg">Must be an email address</span>
     
       <input name="password" type="password" placeholder="Password" formControlName="password" class="register-login__form__input">
+      <span *ngIf="loginForm.controls.password?.errors && loginForm.controls.password.touched"
+       class="register-login__form__input__error-msg">Password is required!</span>
       
       <div class="register-login__form__btn-container">
         <input type="submit" value="Login" class="btn-primary" [disabled]="!loginForm.valid">

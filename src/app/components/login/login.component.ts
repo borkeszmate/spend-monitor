@@ -4,6 +4,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { PasswordValidation } from '../../validators/password.validator';
 import { NotifierService } from 'angular-notifier';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,6 +15,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private Auth: AuthService,
+    private router: Router,
     notifierService: NotifierService) {
 
       this.notifier = notifierService;
@@ -55,7 +58,7 @@ export class LoginComponent implements OnInit {
       password: new FormControl('', [Validators.required])
     });
 
-    this.notifier.notify('success', 'You are awesome! I mean it!');
+
   }
 
   public loginRegisterToggler() {
@@ -85,7 +88,17 @@ export class LoginComponent implements OnInit {
     this.loginEmail = this.loginForm.value.email;
     this.loginPassword = this.loginForm.value.password;
 
-    this.Auth.login(this.loginEmail, this.loginPassword);
+
+
+    this.Auth.login(this.loginEmail, this.loginPassword).then(
+      response => {
+        this.router.navigate(['']);
+      }
+    )
+      .catch(err => {
+        // console.log(err);
+        this.notifier.notify('error', err.message);
+      });
 
 
 

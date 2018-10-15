@@ -42,8 +42,15 @@
       font-size: 2rem;
       border: .2rem white solid;
       border-radius: 2%;
+
+      &__error-msg{
+        color: red;
+        font-size: 1.8rem;
+        font-weight: bold;
+      }
       
     }
+
     &__btn-container{
       
       width: 100%;
@@ -63,8 +70,6 @@
       &__loginLink{
           color: $color-blue-1;
           cursor: pointer;
-
-
         }
 
     }
