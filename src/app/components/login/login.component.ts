@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { PasswordValidation } from '../../validators/password.validator';
 import { NotifierService } from 'angular-notifier';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private Auth: AuthService,
+    private User_service: UserService,
     private router: Router,
     notifierService: NotifierService) {
 
@@ -74,8 +76,18 @@ export class LoginComponent implements OnInit {
     this.registerEmail = this.registerForm.value.email;
     this.registerPassword = this.registerForm.value.password;
 
-    this.Auth.register(this.registerEmail, this.registerPassword).then(response =>
-      this.Auth.login(this.registerEmail, this.registerPassword))
+    this.Auth.register(this.registerEmail, this.registerPassword).then((response) => {
+
+      this.Auth.login(this.registerEmail, this.registerPassword).then(
+        loginResponse => {
+          // When user is registered und succesfully signed in
+          //  --> Create a user node in the database, navigate to homepage and display a welcome messega
+          this.User_service.addUserToFirebase();
+          this.router.navigate(['']);
+          this.notifier.notify('success', `Hi! You have successfully logged in as ${this.registerEmail}`);
+        }
+      );
+    })
     .catch(err => {
       this.notifier.notify('error', err.message);
     });

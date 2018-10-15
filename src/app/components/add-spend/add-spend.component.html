@@ -15,16 +15,18 @@
       <label for="amount">How much did you spend?</label>
       <input name="amount" type="number" placeholder="1500" formControlName="amount" class="add-spend__form__input">
   
-      <label for="date">When did purchase something?</label>
-      <input name="date" type="date" formControlName="date" class="add-spend__form__input">
 
-      <label for="category">What was the money spent on?</label>
-      <select name="category" formControlName="category" class="add-spend__form__input">
-        <option value="Cash">Cash</option>
-        <option value="Cash">Grocery</option>
-        <option value="Cash">Bars and entertainment</option>
-        <option value="Cash">Recreation</option>
-      </select>
+      <label for="category">
+        <i class="fas fa-plus"></i>
+        <p>Bars and entertainment</p>
+       <input name="category" formControlName="category" class="add-spend__form__input" type="radio">
+      </label>
+      
+      <label for="category">
+        <i class="fas fa-plus"></i>
+        <p>Bars and entertainment</p>
+        <input name="category" formControlName="category" class="add-spend__form__input" type="radio" value="kocsma">
+      </label>
   
       <div class="add-spend__form__btn-container">
         <input type="submit" value="Add spend" class="btn-primary" [disabled]="!addForm.valid">

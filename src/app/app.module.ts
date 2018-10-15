@@ -23,6 +23,7 @@ import { SpendsService } from './services/spends.service';
 // Router
 import { Routes, RouterModule } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { UserComponent } from './components/user/user.component';
 
 
 
@@ -39,7 +40,8 @@ const routes: Routes = [
     LoginComponent,
     SpendsFeedComponent,
     NavbarComponent,
-    AddSpendComponent
+    AddSpendComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="expense__category__name">
-        <p>{{expense.name}}</p>
+        <p>{{expense.category}}</p>
       </div>
     </div>
 
@@ -32,7 +32,7 @@
       </div>
 
       <div class="expense__amount-date__date">
-        {{expense.date}}
+        {{expense.date | date}}
       </div>
     </div>
   </div>

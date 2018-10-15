@@ -66,6 +66,11 @@ export class AuthService {
    return this.afAuth.authState;
   }
 
+  getUserIdinOnInit() {
+    this.afAuth.authState.subscribe(result => {
+      this.userdId = result.uid;
+    });
+  }
 
 
 
