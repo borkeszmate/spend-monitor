@@ -33,7 +33,7 @@
     
 
     
-    &__input{
+    &__input-text{
     
       width: 100%;
       margin: 1rem 0rem;
@@ -41,8 +41,25 @@
       text-align: center;
       font-size: 2rem;
       border: .2rem white solid;
-      border-radius: 2%;
       
+    }
+
+    &__input-radio{
+      
+      label{
+        display: flex;
+        background-color: white;
+        margin: 1rem 0;
+        padding: 1rem 1rem;
+        font-size: 3rem;
+        justify-content: space-between;
+        align-items: center;
+
+        input{
+          height: 5rem;
+        }
+      }
+
     }
     &__btn-container{
       

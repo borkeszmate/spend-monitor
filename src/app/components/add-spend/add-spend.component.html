@@ -5,28 +5,27 @@
   <section class="add-spend">
   
     <div class="title">
-      <i class="fas fa-file-invoice-dollar"></i>
-      <h2>Gave away some money</h2>
+      
+      <h2>Gave away some money?</h2>
       <h1>Record it here and keep tracking your spends!</h1>
     </div>
   
     <form [formGroup]="addForm" (ngSubmit)="addSubmit()" class="add-spend__form">
       
       <label for="amount">How much did you spend?</label>
-      <input name="amount" type="number" placeholder="1500" formControlName="amount" class="add-spend__form__input">
+      <input name="amount" type="number" placeholder="1500" formControlName="amount" class="add-spend__form__input-text">
   
+      <div class="add-spend__form__input-radio">
+        
+        <label for="category">
+          <input name="category" id="bar" formControlName="category" class="add-spend__form__input" type="radio" value="Bars and entertainment">
+            <label for="bar">Bars and drinking</label>
+          <!-- <p>Bars and entertainment</p> -->
+          <i class="fas fa-plus"></i>
+        </label>
 
-      <label for="category">
-        <i class="fas fa-plus"></i>
-        <p>Bars and entertainment</p>
-       <input name="category" formControlName="category" class="add-spend__form__input" type="radio">
-      </label>
+      </div>
       
-      <label for="category">
-        <i class="fas fa-plus"></i>
-        <p>Bars and entertainment</p>
-        <input name="category" formControlName="category" class="add-spend__form__input" type="radio" value="kocsma">
-      </label>
   
       <div class="add-spend__form__btn-container">
         <input type="submit" value="Add spend" class="btn-primary" [disabled]="!addForm.valid">
