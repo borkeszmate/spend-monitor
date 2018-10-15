@@ -76,7 +76,10 @@ export class LoginComponent implements OnInit {
 
     this.Auth.register(this.registerEmail, this.registerPassword).then(response =>
       this.Auth.login(this.registerEmail, this.registerPassword))
-    .catch(err => console.log(err));
+    .catch(err => {
+      this.notifier.notify('error', err.message);
+    });
+
 
   }
 
@@ -93,6 +96,7 @@ export class LoginComponent implements OnInit {
     this.Auth.login(this.loginEmail, this.loginPassword).then(
       response => {
         this.router.navigate(['']);
+        this.notifier.notify('success', `Hi! You have successfully logged in as ${this.loginEmail}`);
       }
     )
       .catch(err => {

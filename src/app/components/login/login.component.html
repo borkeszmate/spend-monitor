@@ -15,17 +15,27 @@
     <form [formGroup]="registerForm" (ngSubmit)="registerSubmit()" class="register-login__form" >
       
       <input name="email" type="text" placeholder="Email address" formControlName="email" class="register-login__form__input"> 
-      
+      <span *ngIf="registerForm.controls.email?.errors?.required && registerForm.controls.email.touched" class="register-login__form__input__error-msg">Email
+        is required!</span>
+      <span *ngIf="registerForm.controls.email?.errors?.email && registerForm.controls.email.touched" class="register-login__form__input__error-msg">Must
+        be an email address</span>
       
       
       <input name="password" type="password" placeholder="Password" formControlName="password" class="register-login__form__input">
+      <span *ngIf="registerForm.controls.password?.errors?.required && registerForm.controls.password.touched" class="register-login__form__input__error-msg">Password
+        is required!</span>
       
+      <input name="confirm_password" type="password" placeholder="Confirm Password" formControlName="confirm_password" class="register-login__form__input">
+      <span *ngIf="registerForm.controls.confirm_password?.errors?.required && registerForm.controls.confirm_password.touched" class="register-login__form__input__error-msg">Confirm password
+        is required!</span>
+
+      <span *ngIf="registerForm.controls.confirm_password?.errors?.MatchPassword && registerForm.controls.confirm_password.touched"
+        class="register-login__form__input__error-msg">Password and confirm password must match!</span>
       
-      <input name="confirm_password" type="password" placeholder="Password" formControlName="confirm_password" class="register-login__form__input">
 
       <div class="register-login__form__btn-container">
-        <input type="submit" value="register" class="btn-primary"
-        [disabled]="!registerForm.valid">
+        <input type="submit" value="register" class="btn-primary" [disabled]="!registerForm.valid"
+        >
       </div>
 
       <div class="register-login__form__loginChange">
