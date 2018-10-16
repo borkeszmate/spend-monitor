@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
+  image = 'fas fa-air-freshener';
   constructor() { }
   ngOnInit() {
 

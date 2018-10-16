@@ -2,7 +2,7 @@
 @import '../../../styles.scss';
 
 .container{
-  height: 100vh;
+  
   background-color: $color-primary;
   display: flex;
   align-items: center;
@@ -37,7 +37,7 @@
     
       width: 100%;
       margin: 1rem 0rem;
-      height: 5rem;
+      height: 8rem;
       text-align: center;
       font-size: 2rem;
       border: .2rem white solid;
@@ -50,15 +50,36 @@
         display: flex;
         background-color: white;
         margin: 1rem 0;
-        padding: 1rem 1rem;
-        font-size: 3rem;
+        padding: 0rem 2rem;
+        font-size: 2rem;
         justify-content: space-between;
         align-items: center;
 
-        input{
-          height: 5rem;
-        }
       }
+        &__field{
+          
+          background-color: red;
+          color: red;
+          input[type="radio"]{
+            color: red;
+          }
+        }
+        &__image{
+        margin: 1rem;
+        padding: 1rem;
+        border-radius: 100%;
+        background-color: $color-primary;
+        color: white; 
+        img{
+          height: 1.5rem;
+          width: 2.5rem;
+          // background-color: white;
+          svg{
+            color: white;
+          }
+
+        }
+        }
 
     }
     &__btn-container{

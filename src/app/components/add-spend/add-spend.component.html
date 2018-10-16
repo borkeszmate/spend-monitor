@@ -11,22 +11,29 @@
     </div>
   
     <form [formGroup]="addForm" (ngSubmit)="addSubmit()" class="add-spend__form">
-      
+      <!-- Amount input -->
       <label for="amount">How much did you spend?</label>
       <input name="amount" type="number" placeholder="1500" formControlName="amount" class="add-spend__form__input-text">
   
-      <div class="add-spend__form__input-radio">
-        
+      <!-- Category input -->
+      <h2>Select a category</h2>
+      <div class="add-spend__form__input-radio" *ngFor="let category of defaultCostCategories" >
         <label for="category">
-          <input name="category" id="bar" formControlName="category" class="add-spend__form__input" type="radio" value="Bars and entertainment">
-            <label for="bar">Bars and drinking</label>
+          <input name="category" id="{{category.name}}" formControlName="category" class="add-spend__form__input-radio__field" type="radio" value="{{category.name}}">
+            <label for="{{category.name}}">{{category.name}}</label>
           <!-- <p>Bars and entertainment</p> -->
-          <i class="fas fa-plus"></i>
+          <div class="add-spend__form__input-radio__image" >
+            <img src={{category.img}} alt="{{category.name}}">
+          </div>
         </label>
 
       </div>
+<!-- Add further elements to list -->
       
-  
+    <h3>Add your own categories!</h3>
+      
+      <input type="text" class="add-spend__form__input-text"  placeholder="Add further categories!" >
+  <!--Form submit btn  -->
       <div class="add-spend__form__btn-container">
         <input type="submit" value="Add spend" class="btn-primary" [disabled]="!addForm.valid">
       </div>
