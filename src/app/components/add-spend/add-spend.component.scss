@@ -108,3 +108,35 @@
     }
   }
 }
+
+.add-categories{
+
+  margin: 1rem auto;
+  width: 60%;
+  &__container{
+    position: relative;
+    // background-color: yellow;
+    
+    &__button{
+      position: absolute;
+      top: 50%;
+      right: -5%;
+      transform: translateY(-50%);
+      background-color: $color-primary-dark;
+      border-radius: 50%;
+      padding: 3rem;
+      i{
+        color: white;
+        font-size: 3.5rem;
+        transition: all .2s;
+      }
+    }
+
+    &__button:hover{
+      i{
+        font-size: 4rem;
+        transition: all .2s;
+      }
+    }
+  }
+}

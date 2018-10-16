@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NotifierModule } from 'angular-notifier';
+import { FormsModule } from '@angular/forms';
 
 // Firebase
 import { AngularFireModule } from '@angular/fire';
@@ -30,7 +31,8 @@ import { UserComponent } from './components/user/user.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {  path: '', component: SpendsFeedComponent},
-   {path: 'add', component: AddSpendComponent}
+   {path: 'add', component: AddSpendComponent},
+  { path: 'user', component: UserComponent}
 ];
 
 @NgModule({
@@ -41,10 +43,11 @@ const routes: Routes = [
     SpendsFeedComponent,
     NavbarComponent,
     AddSpendComponent,
-    UserComponent
+    UserComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,

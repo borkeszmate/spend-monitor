@@ -70,5 +70,23 @@ export class UserService {
     });
   }
 
+  // getUserDetailsFromFirebase () {
+  //   return this.Auth.getUserId().subscribe((user) => {
+  //     // Make the initial used object
+  //     this.initUser.id = user.uid;
+  //     this.db.database.ref(`users/${this.initUser.id}`).once('value', (snapshot) => {
+  //       // console.log(snapshot.val().email);
+  //       this.initUser.id = snapshot.val().id;
+  //       this.initUser.email = snapshot.val().email;
+  //       this.initUser.costCategories = snapshot.val().costCategories;
+  //       return this.initUser;
+  //     });
 
+  //   });
+
+  // }
+
+  getUserDetailsFromFirebase() {
+    return this.Auth.getUserId();
+  }
 }

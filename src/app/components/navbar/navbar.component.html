@@ -10,6 +10,15 @@
     <div class="opened-navbar__container__navigation">
       <div class="opened-navbar__container__navigation__menu">
         <ul>
+        <li class="opened-navbar__container__navigation__menu__item">
+          <a [routerLink]="['']" routerLinkActive="router-link-active">Home</a>
+        </li>
+        <li class="opened-navbar__container__navigation__menu__item">
+          <a [routerLink]="['/add']" routerLinkActive="router-link-active">New record</a>
+        </li>
+        <li class="opened-navbar__container__navigation__menu__item">
+          <a [routerLink]="['/user']" routerLinkActive="router-link-active" >My profile</a>
+        </li>
           <li class="opened-navbar__container__navigation__menu__item">
             <a (click)="signOut()">Sign out</a>
           </li>

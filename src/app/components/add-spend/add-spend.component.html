@@ -29,17 +29,25 @@
 
       </div>
 <!-- Add further elements to list -->
-      
+
+<!--Form submit btn  -->
+<div class="add-spend__form__btn-container">
+  <input type="submit" value="Add spend" class="btn-primary" [disabled]="!addForm.valid">
+</div>
+
+</form>
+  <div class="add-categories">
     <h3>Add your own categories!</h3>
+    <div class="add-categories__container">
+      <input type="text" class="add-spend__form__input-text"  placeholder="Add further categories!" id="addedCategory" [(ngModel)]="addedCategory">
       
-      <input type="text" class="add-spend__form__input-text"  placeholder="Add further categories!" >
-  <!--Form submit btn  -->
-      <div class="add-spend__form__btn-container">
-        <input type="submit" value="Add spend" class="btn-primary" [disabled]="!addForm.valid">
-      </div>
-  
-    </form>
+      <div class="add-categories__container__button" (click)="addCategory()">
+        <i class="fas fa-plus"></i>
+       </div>
+     </div>
+     
+   </div> 
   
   </section>
-
+  
 </div>

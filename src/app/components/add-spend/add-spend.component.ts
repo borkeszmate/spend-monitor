@@ -4,6 +4,7 @@ import { Spend } from '../../interfaces/spend';
 
 import { NotifierService } from 'angular-notifier';
 
+
 // Services
 import { SpendsService } from '../../services/spends.service';
 import { AuthService } from '../../services/auth.service';
@@ -52,7 +53,13 @@ export class AddSpendComponent implements OnInit {
       name: 'Vehicle',
       img: '../../../assets/img/vehicle.svg'
     },
+    {
+      name: 'Other',
+      img: '../../../assets/img/other.svg'
+    }
   ];
+
+  addedCategory;
 
   constructor(
     private Spends_Service: SpendsService,
@@ -78,7 +85,6 @@ export class AddSpendComponent implements OnInit {
       amount: new FormControl('', [Validators.required]),
       category: new FormControl('', [Validators.required])
     });
-
   }
 
 
@@ -93,6 +99,21 @@ export class AddSpendComponent implements OnInit {
       console.log(this.spend);
       this.notifier.notify('success', `You have successfully added ${this.spend.amount} Ft as ${this.spend.category} cost!`);
     });
+  }
+
+  addCategory() {
+    if (this.addedCategory != null ) {
+      const objectToGive =  {
+       name : this.addedCategory.toString(),
+       img: '../../../assets/img/other.svg'
+      };
+      // console.log(objectToGive);
+      this.defaultCostCategories.push(objectToGive);
+
+    } else {
+      this.notifier.notify('warning', 'Please, enter a category before submitting!');
+    }
+
 
   }
 }

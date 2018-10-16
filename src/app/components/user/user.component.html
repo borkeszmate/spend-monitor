@@ -1,2 +1,40 @@
 <app-navbar></app-navbar>
 
+<h1>Hi! You are logged in as: {{user.email}}</h1>
+
+<h2>Select a category</h2>
+
+
+
+<div class="user-spend" *ngFor="let category of user.costCategories; let i = index">
+  <div class="user-spend__name">
+   {{category.name}}
+  </div>
+
+  <div class="user-spend__image">
+   <div class="user-spend__image__circle">
+    <img src={{category.img}} alt="{{category.name}}">
+
+   </div>
+  </div>
+  <div class="user-spend__delete">
+   <i class="fas fa-trash" (click)="deleteCategory(i)"></i>
+  </div>
+</div>
+
+<div class="add-categories-container">
+ <h3>Add your own categories!</h3>
+  <div class="add-categories">
+   <div class="add-categories__container">
+    <input type="text" class="add-categories__form" placeholder="Add further categories!" id="addedCategory"
+     [(ngModel)]="addedCategory">
+  
+    <div class="add-categories__container__button" (click)="addCategory()">
+     <i class="fas fa-plus"></i>
+    </div>
+   </div>
+   .
+  
+  </div>
+
+ </div>
