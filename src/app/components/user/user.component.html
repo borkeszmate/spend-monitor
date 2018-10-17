@@ -1,47 +1,64 @@
 <app-navbar></app-navbar>
+<div class="container">
 
-<h1>Hi! You are logged in as: {{user.email}}</h1>
+  <h1>Hi! You are logged in as: {{user.email}}</h1>
 
-<h2>Select a category</h2>
+  <h2>Select a category</h2>
 
 
-<div class="spinner" *ngIf="!isCategoriesLoaded">
-  <img src="../../../assets/img/loader.gif" alt="">
-</div>
-
-<div class="user-spend" *ngFor="let category of user.costCategories; let i = index">
-  <div class="user-spend__name">
-   {{category.name}}
+  <div class="spinner" *ngIf="!isCategoriesLoaded">
+    <img src="../../../assets/img/loader.gif" alt="">
   </div>
 
-  <div class="user-spend__image">
-   <div class="user-spend__image__circle">
-    <img src={{category.img}} alt="{{category.name}}">
-
-   </div>
-  </div>
-  <div class="user-spend__delete">
-   <i class="fas fa-trash" (click)="deleteCategory(i)"></i>
-  </div>
-</div>
-
-<div class="add-categories-container">
- <h3>Add your own categories!</h3>
-  <div class="add-categories">
-   <div class="add-categories__container">
-    <input type="text" class="add-categories__form" placeholder="Add further categories!" id="addedCategory"
-     [(ngModel)]="addedCategory">
-  
-    <div class="add-categories__container__button" (click)="addCategory()">
-     <i class="fas fa-plus"></i>
+  <div class="user-spend" *ngFor="let category of user.costCategories; let i = index">
+    <div class="user-spend__name">
+    {{category.name}}
     </div>
-   </div>
-   <!-- Save changes -->
-   <div class="save-changes" *ngIf="isCategoriesEdited" (click)="saveCategoryChanges()">
-     <button class="btn btn-primary save-changes__btn">
-       Save changes
-     </button>
-   </div>
-   
+
+    <div class="user-spend__image">
+    <div class="user-spend__image__circle">
+      <img src={{category.img}} alt="{{category.name}}">
+
+    </div>
+    </div>
+    <div class="user-spend__delete">
+    <i class="fas fa-trash" (click)="deleteCategory(i)"></i>
+    </div>
   </div>
- </div>
+
+  <div class="restore-defaults">
+    <button class="btn btn-secondary" (click)="restoreBtnToggler()">Restore Default Categories</button>
+  </div>
+
+
+  <div class="add-categories-container">
+  <h3>Add your own categories!</h3>
+    <div class="add-categories">
+    <div class="add-categories__container">
+      <input type="text" class="add-categories__form" placeholder="Add further categories!" id="addedCategory"
+      [(ngModel)]="addedCategory">
+    
+      <div class="add-categories__container__button" (click)="addCategory()">
+      <i class="fas fa-plus"></i>
+      </div>
+    </div>
+    <!-- Save changes -->
+    <div class="save-changes" *ngIf="isCategoriesEdited" (click)="saveCategoryChanges()">
+      <button class="btn btn-primary save-changes__btn">
+        Save changes
+      </button>
+    </div>
+    
+    </div>
+  </div>
+  <!-- Restore modal -->
+  <div class="restore-modal" *ngIf="isRestoreClicked" (click)="restoreBtnToggler()">
+    <div class="restore-modal__window">
+      <p>Are you sure to restore the default cost categories? Your custom categories will be lost.</p>
+      <div class="restore-modal__window__options">
+        <button class="restore-modal__window__options__restore" (click)="restoreSpendCategories()">Restore</button>
+        <button class="restore-modal__window__options__cancel" (click)="restoreBtnToggler()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

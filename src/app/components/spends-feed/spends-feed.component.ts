@@ -2,7 +2,7 @@ import { Component, OnInit, OnChanges, AfterViewInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { SpendsService } from '../../services/spends.service';
 import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { UserService } from '../../services/user.service';
 
 
 
@@ -19,7 +19,9 @@ export class SpendsFeedComponent implements OnChanges, OnInit, AfterViewInit {
   constructor(
     private Auth: AuthService,
     private Spends_Service: SpendsService,
-    private router: Router) {
+    private router: Router,
+    private User_service: UserService
+    ) {
 
     }
   // Properties
@@ -61,14 +63,12 @@ export class SpendsFeedComponent implements OnChanges, OnInit, AfterViewInit {
 
             this.expenses = this.snapshotToArray(snapshot);
             this.expensesLoaded = true;
-            console.log(this.expenses);
-            console.log(this.expensesLoaded);
+            // console.log(this.expenses);
+            // console.log(this.expensesLoaded);
           });
         },
         (error) => error,
-        () => {
-          console.log('completed');
-        }
+
       );
 
   }
@@ -85,7 +85,5 @@ export class SpendsFeedComponent implements OnChanges, OnInit, AfterViewInit {
     return returnArr;
   }
 
-  getExpenseId() {
-    console.log(this.expenses);
-  }
+
 }

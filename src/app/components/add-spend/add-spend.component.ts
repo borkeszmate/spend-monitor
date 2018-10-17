@@ -22,49 +22,6 @@ import { NotifierService } from 'angular-notifier';
 })
 export class AddSpendComponent implements OnInit {
 
-  defaultCostCategories = [
-    {
-      name: 'Bars and coffee houses',
-      img: '../../../assets/img/coffee-cup.png'
-    },
-    {
-      name: 'Grocery',
-      img: '../../../assets/img/grocery.svg'
-    },
-    {
-      name: 'Restaurants',
-      img: '../../../assets/img/food.svg'
-    },
-    {
-      name: 'Entertainment',
-      img: '../../../assets/img/shopping.svg'
-    },
-    {
-      name: 'Transport',
-      img: '../../../assets/img/transport.svg'
-    },
-    {
-      name: 'Shopping',
-      img: '../../../assets/img/shopping.svg'
-    },
-    {
-      name: 'Services',
-      img: '../../../assets/img/coffee-cup.png'
-    },
-    {
-      name: 'Utilities',
-      img: '../../../assets/img/house_rental.svg'
-    },
-    {
-      name: 'Vehicle',
-      img: '../../../assets/img/vehicle.svg'
-    },
-    {
-      name: 'Other',
-      img: '../../../assets/img/other.svg'
-    }
-  ];
-
   user: User = {
     id: '',
     email: '',
@@ -80,6 +37,7 @@ export class AddSpendComponent implements OnInit {
     amount: 0,
     category: '',
     date: 0,
+    img: ''
   };
 
   constructor(
@@ -115,20 +73,23 @@ export class AddSpendComponent implements OnInit {
 // Creating the reactive form
     this.addForm = new FormGroup({
       amount: new FormControl('', [Validators.required]),
-      category: new FormControl('', [Validators.required])
+      category: new FormControl('', [Validators.required]),
     });
   }
 
 
 
-  addSubmit() {
+  addSubmit(i) {
+
     this.spend.amount = this.addForm.value.amount;
     this.spend.category = this.addForm.value.category;
     this.spend.date = new Date().getTime();
 
+
+
     this.Spends_Service.addSpendToFirebase(this.spend)
     .then(result => {
-      console.log(this.spend);
+
       this.notifier.notify('success', `You have successfully added ${this.spend.amount} Ft as ${this.spend.category} cost!`);
     });
   }

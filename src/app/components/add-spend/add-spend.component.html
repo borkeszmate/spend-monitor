@@ -24,13 +24,13 @@
           <h4>Loading categories...</h4>
         <img src="../../../assets/img/loader2.svg" alt="">
       </div>
-      <div class="add-spend__form__input-radio" *ngFor="let category of user.costCategories" >
+      <div class="add-spend__form__input-radio" *ngFor="let category of user.costCategories; let i = index" >
         <label for="category">
           <input name="category" id="{{category.name}}" formControlName="category" class="add-spend__form__input-radio__field" type="radio" value="{{category.name}}">
             <label for="{{category.name}}">{{category.name}}</label>
           <!-- <p>Bars and entertainment</p> -->
           <div class="add-spend__form__input-radio__image" >
-            <img src={{category.img}} alt="{{category.name}}">
+            <img src={{category.img}} alt="{{category.name}}" >
           </div>
         </label>
 

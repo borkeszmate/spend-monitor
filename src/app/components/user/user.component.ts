@@ -24,6 +24,7 @@ export class UserComponent implements OnInit {
   addedCategory;
   isCategoriesLoaded = false;
   isCategoriesEdited = false;
+  isRestoreClicked = false;
 
   private readonly notifier: NotifierService;
   constructor(
@@ -60,7 +61,7 @@ export class UserComponent implements OnInit {
     if (this.addedCategory != null) {
       const objectToGive = {
         name: this.addedCategory.toString(),
-        img: '../../../assets/img/other.svg'
+        img: '../../../assets/img/Other.svg'
       };
       // console.log(objectToGive);
       this.user.costCategories.push(objectToGive);
@@ -86,13 +87,34 @@ export class UserComponent implements OnInit {
   saveCategoryChanges() {
     this.User_service.saveEditedCategoriesToFirebase(this.user)
     .then((result) =>  {
-      console.log(result);
+
       this.notifier.notify('success', `Great, you have successfully saved your changes!`);
+      this.isCategoriesEdited = !this.isCategoriesEdited;
     })
     .catch(err => {
       console.log(err);
       this.notifier.notify('err', 'Oops, something went wrong... Please try again!');
+      this.isCategoriesEdited = !this.isCategoriesEdited;
     });
+  }
+
+  restoreBtnToggler() {
+    this.isRestoreClicked = !this.isRestoreClicked;
+  }
+
+  restoreSpendCategories() {
+    // Setting default cost
+    this.user.costCategories = this.User_service.defaultCostCategories;
+    this.isRestoreClicked = !this.isRestoreClicked;
+    // Save to db
+    this.User_service.saveEditedCategoriesToFirebase(this.user)
+      .then((result) => {
+        this.notifier.notify('info', `You have successfully restored the default cost categories!`);
+      })
+      .catch(err => {
+        console.log(err);
+        this.notifier.notify('err', 'Oops, something went wrong... Please try again!');
+      });
   }
 
 }

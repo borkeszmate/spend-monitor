@@ -60,6 +60,11 @@
         border-radius: 100%;
         background-color: $color-primary;
         color: white;
+
+        img{
+          height: 3rem;
+          width: 3rem;
+        }
       }
     }
 

@@ -11,41 +11,41 @@ export class UserService {
 
   defaultCostCategories = [
     {
-      name: 'Bars and coffee houses',
-      img: '../../../assets/img/coffee-cup.png'
+      name: 'Bars',
+      img: '../../../assets/img/Bars.svg'
     },
     {
       name: 'Grocery',
-      img: '../../../assets/img/grocery.svg'
+      img: '../../../assets/img/Grocery.svg'
     },
     {
       name: 'Restaurants',
-      img: '../../../assets/img/food.svg'
-    },
-    {
-      name: 'Entertainment',
-      img: '../../../assets/img/shopping.svg'
+      img: '../../../assets/img/Food.svg'
     },
     {
       name: 'Transport',
-      img: '../../../assets/img/transport.svg'
+      img: '../../../assets/img/Transport.svg'
     },
     {
       name: 'Shopping',
-      img: '../../../assets/img/shopping.svg'
+      img: '../../../assets/img/Shopping.svg'
     },
     {
       name: 'Services',
-      img: '../../../assets/img/coffee-cup.png'
+      img: '../../../assets/img/Services.svg'
     },
     {
       name: 'Utilities',
-      img: '../../../assets/img/house_rental.svg'
+      img: '../../../assets/img/Utilities.svg'
     },
     {
       name: 'Vehicle',
-      img: '../../../assets/img/vehicle.svg'
+      img: '../../../assets/img/Vehicle.svg'
     },
+    {
+      name: 'Education',
+      img: '../../../assets/img/Education.svg'
+    }
   ];
 
   initUser: User = {
