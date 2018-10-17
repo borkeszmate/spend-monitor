@@ -1,43 +1,71 @@
 <app-navbar></app-navbar>
-<!-- Add spend btn -->
-<div class="add-spend" (click)="addSpendRoute()">
-  <div class="add-spend__icon">
 
-    <i class="fas fa-plus"></i>
+  <div class="container">
+    
+    <!-- Add spend btn -->
+  <div class="add-spend" (click)="addSpendRoute()">
+    <div class="add-spend__icon">
+
+      <i class="fas fa-plus"></i>
+    </div>
   </div>
-</div>
 
-<div class="spinner" *ngIf="!expensesLoaded">
-  <h4>Loading your spends...</h4>
-  <img src="../../../assets/img/loader.gif" alt="">
-</div>
 
-<section class="expenses-container" *ngIf="expensesLoaded">
+  <!-- Loading icon before expenses fetched from db -->
+  <div class="spinner" *ngIf="!expensesLoaded">
+    <h4>Loading your spends...</h4>
+    <img src="../../../assets/img/loader.gif" alt="">
+  </div>
 
-  <div class="expense" *ngFor="let expense of expenses">
 
-    <div class="expense__category">
-      <div class="expense__category__icon">
-        <div class="expense__category__icon__bg">
-          <img src="../../../assets/img/{{expense.category}}.svg" alt="{{expense.category}}">
+  <!-- Expenses -->
+  <section class="expenses-container" *ngIf="expensesLoaded">
+
+    <div class="expense" *ngFor="let expense of expenses" (click)="editToggle(expense)" >
+        <div class="expense__category" >
+          <div class="expense__category__icon">
+            <div class="expense__category__icon__bg">
+              <img src="../../../assets/img/{{expense.category}}.svg" alt="{{expense.category}}">
+            </div>
+          </div>
+          <div class="expense__category__name">
+            <p>{{expense.category}}</p>
+          </div>
         </div>
-      </div>
-      <div class="expense__category__name">
-        <p>{{expense.category}}</p>
-      </div>
+
+        <div class="expense__amount-date">
+          <div class="expense__amount-date__amount">
+            <p>{{expense.amount | currency : 'HUF' : 'symbol' : '1.0'  }}</p>
+          </div>
+
+          <div class="expense__amount-date__date">
+            {{expense.date | date}}
+          </div>
+        </div>
+        <div class="expense__edit">
+          <i class="fas fa-pen"></i>
+        </div>
+      
     </div>
 
-    <div class="expense__amount-date">
-      <div class="expense__amount-date__amount">
-        <p>{{expense.amount}}</p>
-      </div>
+  </section>
 
-      <div class="expense__amount-date__date">
-        {{expense.date | date}}
-      </div>
+  <div class="edit">
+    <div class="edit__close-arrow">
+      <i class="fas fa-arrow-circle-right" (click)="editToggle()"></i>
+      <h5>Spend edit</h5>
     </div>
-    <div>{{expense.key}}</div>
+    <div class="edit__form">
+      <form >
+        <div class="edit__form__select" >
+          <h6>Category</h6>
+          <select name="Category" id="Category" >
+            <option *ngFor="let category of user.costCategories" value="{{category.name}}">{{category.name}}</option>
+          </select>
+        </div>
+        <input type="number" placeholder="{{openedExpense?.amount}}">
+      </form>
+    </div>
   </div>
 
-</section>
-
+</div>
