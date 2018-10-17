@@ -89,4 +89,13 @@ export class UserService {
   getUserDetailsFromFirebase() {
     return this.Auth.getUserId();
   }
+
+  saveEditedCategoriesToFirebase(user) {
+  return this.db.database.ref(`users/${user.id}`).set({
+    id : user.id,
+    email: user.email,
+    costCategories : user.costCategories
+    });
+  }
+
 }

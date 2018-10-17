@@ -8,7 +8,8 @@
 </div>
 
 <div class="spinner" *ngIf="!expensesLoaded">
-  <img src="../../../assets/Cube-1s-200px.gif" alt="">
+  <h4>Loading your spends...</h4>
+  <img src="../../../assets/img/loader.gif" alt="">
 </div>
 
 <section class="expenses-container" *ngIf="expensesLoaded">
@@ -35,6 +36,7 @@
         {{expense.date | date}}
       </div>
     </div>
+    <div>{{expense.key}}</div>
   </div>
 
 </section>

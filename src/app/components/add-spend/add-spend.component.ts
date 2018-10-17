@@ -1,13 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+// Interfaces
+import { User } from '../../interfaces/user';
 import { Spend } from '../../interfaces/spend';
-
-import { NotifierService } from 'angular-notifier';
-
 
 // Services
 import { SpendsService } from '../../services/spends.service';
 import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
+
+// Db
+import { AngularFireDatabase } from '@angular/fire/database';
+// Notification
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-add-spend',
@@ -59,16 +65,16 @@ export class AddSpendComponent implements OnInit {
     }
   ];
 
+  user: User = {
+    id: '',
+    email: '',
+    costCategories: []
+  };
   addedCategory;
-
-  constructor(
-    private Spends_Service: SpendsService,
-    private Auth: AuthService,
-    private notifierService: NotifierService
-    ) {
-    this.notifier = notifierService;
-     }
+  isCategoriesLoaded = false;
+  isCategoriesEdited = false;
   private readonly notifier: NotifierService;
+
   addForm: FormGroup;
   spend: Spend = {
     amount: 0,
@@ -76,11 +82,37 @@ export class AddSpendComponent implements OnInit {
     date: 0,
   };
 
-  ngOnInit() {
-    this.Auth.checkIfLoggedIn();
-    this.Auth.getToken();
-    this.Auth.getUserIdinOnInit();
+  constructor(
+    private Spends_Service: SpendsService,
+    private Auth: AuthService,
+    private User_service: UserService,
+    private db: AngularFireDatabase,
+    private notifierService: NotifierService
+    ) {
+    this.notifier = notifierService;
+     }
 
+
+  ngOnInit() {
+    // Navigate away if not logged in
+    this.Auth.checkIfLoggedIn();
+
+    // Fetching currenct user's data from firebase
+    this.User_service.getUserDetailsFromFirebase().subscribe((user) => {
+      // Make the initial used object
+      this.user.id = user.uid;
+      this.db.database.ref(`users/${this.user.id}`).once('value', (snapshot) => {
+        // console.log(snapshot.val().email);
+        this.user.id = snapshot.val().id;
+        this.user.email = snapshot.val().email;
+        this.user.costCategories = snapshot.val().costCategories;
+
+        this.isCategoriesLoaded = true;
+      });
+
+    });
+
+// Creating the reactive form
     this.addForm = new FormGroup({
       amount: new FormControl('', [Validators.required]),
       category: new FormControl('', [Validators.required])
@@ -108,7 +140,19 @@ export class AddSpendComponent implements OnInit {
        img: '../../../assets/img/other.svg'
       };
       // console.log(objectToGive);
-      this.defaultCostCategories.push(objectToGive);
+      this.user.costCategories.push(objectToGive);
+      this.User_service.saveEditedCategoriesToFirebase(this.user)
+        .then((result) => {
+          console.log(result);
+          this.notifier.notify('success', `
+          Great, you have successfully added ${objectToGive.name} to your cost categories!
+          Remember, you can edit your cost categories under your profile settings.
+          `);
+        })
+        .catch(err => {
+          console.log(err);
+          this.notifier.notify('err', 'Oops, something went wrong... Please try again!');
+        });
 
     } else {
       this.notifier.notify('warning', 'Please, enter a category before submitting!');

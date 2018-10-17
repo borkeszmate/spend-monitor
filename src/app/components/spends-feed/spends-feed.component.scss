@@ -1,5 +1,8 @@
 @import '../../../styles.scss';
 
+.spinner{
+  text-align: center;
+}
 .add-spend{
   position: fixed;
   bottom: 10%;
@@ -34,8 +37,10 @@
   justify-content: space-between;
   align-items: center;
   padding: 2rem 0;
-  width: 95%;
-  // background-color: greenyellow;
+  width: 70%;
+  @media only screen and (max-width: 50em) {
+   width: 95%;
+  } 
   
 
   &__category{

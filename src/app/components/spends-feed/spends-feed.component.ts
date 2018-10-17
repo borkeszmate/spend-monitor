@@ -85,4 +85,7 @@ export class SpendsFeedComponent implements OnChanges, OnInit, AfterViewInit {
     return returnArr;
   }
 
+  getExpenseId() {
+    console.log(this.expenses);
+  }
 }

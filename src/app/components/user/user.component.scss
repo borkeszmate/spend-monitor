@@ -1,6 +1,10 @@
 
 @import '../../../styles.scss';
 
+.spinner{
+  text-align: center;
+}
+
 .user-spend{
  display: flex;
  width: 50%;
@@ -93,5 +97,14 @@
         transition: all .2s;
       }
     }
+  }
+}
+
+.save-changes{
+  text-align: right;
+  margin: 3rem 0;
+  
+  &__btn{
+    font-size: 2.5rem !important;
   }
 }

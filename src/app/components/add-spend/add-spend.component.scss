@@ -1,6 +1,14 @@
 
 @import '../../../styles.scss';
 
+.spinner{
+  text-align: center;
+  h4{
+    color: white;
+    font-size: 4rem;
+  }
+}
+
 .container{
   
   background-color: $color-primary;
