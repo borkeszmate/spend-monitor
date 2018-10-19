@@ -98,7 +98,7 @@ export class AddSpendComponent implements OnInit {
     if (this.addedCategory != null ) {
       const objectToGive =  {
        name : this.addedCategory.toString(),
-       img: '../../../assets/img/other.svg'
+       img: '../../../assets/img/Other.svg'
       };
       // console.log(objectToGive);
       this.user.costCategories.push(objectToGive);

@@ -25,6 +25,7 @@ import { SpendsService } from './services/spends.service';
 import { Routes, RouterModule } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UserComponent } from './components/user/user.component';
+import { ChartComponent } from './components/chart/chart.component';
 
 
 
@@ -44,6 +45,7 @@ const routes: Routes = [
     NavbarComponent,
     AddSpendComponent,
     UserComponent,
+    ChartComponent,
   ],
   imports: [
     BrowserModule,

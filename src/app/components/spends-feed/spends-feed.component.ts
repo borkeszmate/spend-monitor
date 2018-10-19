@@ -71,7 +71,7 @@ export class SpendsFeedComponent implements OnInit {
         this.user.id = snapshot.val().id;
         this.user.email = snapshot.val().email;
         this.user.costCategories = snapshot.val().costCategories;
-        console.log(this.user);
+        // console.log(this.user);
       });
 
     });
@@ -89,8 +89,6 @@ export class SpendsFeedComponent implements OnInit {
 
             this.expenses = this.snapshotToArray(snapshot);
             this.expensesLoaded = true;
-            // console.log(this.expenses);
-            // console.log(this.expensesLoaded);
           });
         },
         (error) => error,

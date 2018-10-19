@@ -2,12 +2,12 @@
 
 
 <div class="container">
-  
+
   <section class="add-spend">
     
-    <div class="title">
+    <div class="title" >
       
-      <h2>Gave away some money?</h2>
+      <h2 >Gave away some money?</h2>
       <h1>Record it here and keep tracking your spends!</h1>
     </div>
     
@@ -25,7 +25,7 @@
         <img src="../../../assets/img/loader2.svg" alt="">
       </div>
       <div class="add-spend__form__input-radio" *ngFor="let category of user.costCategories; let i = index" >
-        <label for="category">
+        <label for="category" >
           <input name="category" id="{{category.name}}" formControlName="category" class="add-spend__form__input-radio__field" type="radio" value="{{category.name}}">
             <label for="{{category.name}}">{{category.name}}</label>
           <!-- <p>Bars and entertainment</p> -->
