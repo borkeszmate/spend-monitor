@@ -12,7 +12,6 @@ import { AngularFireDatabase } from '@angular/fire/database';
 
 // Components
 import { AppComponent } from './app.component';
-import { AdminComponent } from './components/admin/admin.component';
 import { LoginComponent } from './components/login/login.component';
 import { SpendsFeedComponent } from './components/spends-feed/spends-feed.component';
 import { AddSpendComponent } from './components/add-spend/add-spend.component';
@@ -26,6 +25,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UserComponent } from './components/user/user.component';
 import { ChartComponent } from './components/chart/chart.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 
@@ -39,13 +39,13 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    AdminComponent,
     LoginComponent,
     SpendsFeedComponent,
     NavbarComponent,
     AddSpendComponent,
     UserComponent,
     ChartComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

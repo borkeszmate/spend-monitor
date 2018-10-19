@@ -1,0 +1,19 @@
+@import '../../../styles.scss';
+
+.footer{
+ height: 10rem;
+ background-color: $color-primary-light;
+ &__container{
+  display: flex;
+  
+ }
+ &__title{
+
+ }
+ &__logos{
+  display: flex;
+  img{
+   width: 10%;
+  }
+ }
+}

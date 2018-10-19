@@ -58,15 +58,14 @@ export class SpendsFeedComponent implements OnInit {
 
   ngOnInit() {
 
-      this.Auth.checkIfLoggedIn();
-      this.getSpends();
-      this.editArea = document.querySelector('.edit');
-      this.getUser();
+    this.Auth.checkIfLoggedIn();
+    this.getSpends();
+    this.getUser();
+    this.editArea = document.querySelector('#edit');
+    console.log(this.editArea);
       this.editDate =  document.querySelector('.edit__form__date');
       this.EditDateToggler = document.querySelector('.edit__form__dateToggler');
       this.createEditForm('');
-
-
 
 
     }
