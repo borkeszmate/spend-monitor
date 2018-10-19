@@ -26,6 +26,7 @@ export class SpendsFeedComponent implements OnInit {
   expensesLoaded = false;
   editToggler = false;
   editArea;
+  totalSpend: number;
 
   user: User = {
     id: '',
@@ -110,6 +111,7 @@ export class SpendsFeedComponent implements OnInit {
 
             this.expenses = this.snapshotToArray(snapshot);
             this.expensesLoaded = true;
+            this.calculateTotalSpend();
           });
         },
         (error) => error,
@@ -202,6 +204,16 @@ export class SpendsFeedComponent implements OnInit {
     .catch(err => {
       this.notifier.notify('warning', 'Something went wrong. Please, try again!');
     } );
+  }
+
+  calculateTotalSpend() {
+    const allAmounts = [];
+    this.expenses.forEach(expense => {
+      allAmounts.push(expense.amount);
+    });
+    this.totalSpend = allAmounts.reduce((acc, item) => {
+      return acc += item;
+    });
   }
 
 }

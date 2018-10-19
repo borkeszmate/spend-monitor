@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { SpendsService } from '../../services/spends.service';
 import ApexCharts from 'apexcharts';
@@ -9,21 +9,26 @@ import ApexCharts from 'apexcharts';
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss']
 })
-export class ChartComponent implements OnInit {
+export class ChartComponent implements OnInit, OnChanges {
 
   constructor(
     private Auth: AuthService,
     private Spends_Service: SpendsService,
   ) { }
+    showChart = false;
     expenses;
     pieChartKeys;
     pieChartValues;
-  ngOnInit() {
+    pieChartContainer;
+
+  ngOnChanges() {
     this.getSpends();
 
+  }
 
-
-
+  ngOnInit() {
+    this.pieChartContainer = document.querySelector('.pieChart');
+    this.getSpends();
   }
 
   getSpends() {
@@ -36,7 +41,6 @@ export class ChartComponent implements OnInit {
 
             this.expenses = this.snapshotToArray(snapshot);
             this.getCategorySum();
-            this.getChart();
 
           });
         },
@@ -106,5 +110,10 @@ export class ChartComponent implements OnInit {
 
     this.pieChartKeys = Object.keys(reducedArr);
     this.pieChartValues = Object.values(reducedArr);
+    if (this.pieChartValues.length > 0) {
+      this.getChart();
+    }
   }
+
+
 }

@@ -1,6 +1,20 @@
 <app-navbar></app-navbar>
+<!-- Loading icon before expenses fetched from db -->
+<div class="spinner" *ngIf="!expensesLoaded">
+  <h4>Loading your spends...</h4>
+  <img src="../../../assets/img/loader.gif" alt="">
+</div>
 
-  <div class="container">
+  <div class="container" *ngIf="expensesLoaded">
+    <div class="balance-total">
+      <div class="balance-total__spend">
+        <h1>Your total spend: {{totalSpend | currency : 'HUF' : 'symbol' : '1.0' }}</h1>
+
+      </div>
+    </div>
+    
+
+    
 <app-chart></app-chart>
     <!-- Add spend btn -->
   <div class="add-spend" (click)="addSpendRoute()">
@@ -11,11 +25,6 @@
   </div>
 
 
-  <!-- Loading icon before expenses fetched from db -->
-  <div class="spinner" *ngIf="!expensesLoaded">
-    <h4>Loading your spends...</h4>
-    <img src="../../../assets/img/loader.gif" alt="">
-  </div>
 
 
   <!-- Expenses -->

@@ -9,6 +9,18 @@
   min-height: 80vh;
   width: 100%;
 }
+
+.balance-total{
+  width: 40%;
+  margin: 2rem auto;
+  padding: 5rem 1rem;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 8px 9px 5px -5px rgba(0,0,0,0.15);
+  @media only screen and (max-width: 50em) {
+    width: 95%;
+  }
+}
 .add-spend{
   position: fixed;
   bottom: 10%;
