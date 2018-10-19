@@ -152,12 +152,12 @@
     border: solid 1px white;
     width: 80%;
     padding: 3rem 1rem;
+
+    h6{
+      color: white;
+      font-size: 3rem;
+    }
     &__select{ 
-      h6{
-        color: white;
-        // margin: 1rem 0;
-        font-size: 3rem;
-      }
       select{
         
         border: none;
@@ -167,6 +167,44 @@
         margin: 1rem auto;
         font-size: 1.5rem;
 
+      }
+    }
+    &__amount{
+
+        input{
+          border: none;
+          padding: 1rem 1rem;
+          background-color: white;
+          width: 100%;
+          margin: 1rem auto;
+          font-size: 1.5rem;
+          // Remove spin btns
+          input::-webkit-outer-spin-button,
+          input::-webkit-inner-spin-button {  
+            -webkit-appearance: none;
+            margin: 0; 
+          }
+
+        }
+    }
+    &__dateToggler{
+      text-align: right;
+      
+    }
+    &__date{
+      display: none;
+      input{
+          border: none;
+          padding: 1rem 1rem;
+          background-color: white;
+          width: 100%;
+          margin: 1rem auto;
+          font-size: 1.5rem;
+      }
+    }
+    &__btns{
+      input{
+        margin-right: 2rem;
       }
     }
   }

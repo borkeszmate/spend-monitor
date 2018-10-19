@@ -39,7 +39,7 @@
           </div>
 
           <div class="expense__amount-date__date">
-            {{expense.date | date}}
+            {{expense.date | date: 'yyyy.MM.dd.'}}
           </div>
         </div>
         <div class="expense__edit">
@@ -56,14 +56,36 @@
       <h5>Spend edit</h5>
     </div>
     <div class="edit__form">
-      <form >
+
+      <form [formGroup]="editForm"  >
+
         <div class="edit__form__select" >
           <h6>Category</h6>
-          <select name="Category" id="Category" >
+          <select name="Category" id="Category" formControlName="category" >
             <option *ngFor="let category of user.costCategories" value="{{category.name}}">{{category.name}}</option>
           </select>
         </div>
-        <input type="number" placeholder="{{openedExpense?.amount}}">
+
+        <div class="edit__form__amount">
+          <h6>Amount</h6>
+          <input type="number" value="{{openedExpense?.amount}}" formControlName="amount">
+        </div>
+        
+        <div class="edit__form__dateToggler">
+          <button class="btn-info" (click)="toggleEditDate()">Edit date</button>
+        </div>
+
+        <div class="edit__form__date">
+          <h6>Date</h6>
+          <input type="date" formControlName="date" value="{{openedExpense?.date | date: 'yyyy.MM.dd' }}">
+        </div>
+        <input type="hidden" value="openedExpense.key" formControlName="key" >
+        <div class="edit__form__btns">
+          <input type="submit" class="btn-primary" (click)="saveEditedExpense()"  value="Save changes" [disabled]="!editForm.valid">
+          
+          <button class="btn-danger" (click)="deleteSpend(openedExpense.key)" >Delete spend</button>
+        </div>
+        
       </form>
     </div>
   </div>

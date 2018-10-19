@@ -97,7 +97,7 @@ export class ChartComponent implements OnInit {
       const amount = item.amount;
       if (!object.hasOwnProperty(category)) {
         object[category] = 0;
-        console.log(object);
+        // console.log(object);
       }
       object[category] += amount;
       return object;

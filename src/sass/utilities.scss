@@ -21,17 +21,49 @@
 /*BTN SHORTCUTS*/
 .btn-primary{
  padding: 1rem 2rem;
- background-color: $color-primary;
+ background-color: $color-primary-dark;
  text-transform: uppercase;
  text-decoration: none;
  color:white;
  border: 2px solid  white;
  transition: all .3s;
+ cursor: pointer;
   @media only screen and (max-width: 30em) {
   display: block;      
   text-align: center;
   margin: .4rem 0;
-  cursor: pointer;
+  }    
+}
+
+.btn-info{
+ padding: 1rem 2rem;
+ background-color: $color-blue;
+ text-transform: uppercase;
+ text-decoration: none;
+ color:white;
+ border: 2px solid  white;
+ transition: all .3s;
+ cursor: pointer;
+  @media only screen and (max-width: 30em) {
+  display: block;      
+  text-align: center;
+  margin: .4rem 0;
+  }    
+}
+
+.btn-danger{
+ padding: 1rem 2rem;
+ background-color: $color-warning;
+ text-transform: uppercase;
+ text-decoration: none;
+ color:white;
+ border: 2px solid  white;
+ transition: all .3s;
+ cursor: pointer;
+  @media only screen and (max-width: 30em) {
+  display: block;      
+  text-align: center;
+  margin: .4rem 0;
   }    
 }
 // .btn-primary:hover{

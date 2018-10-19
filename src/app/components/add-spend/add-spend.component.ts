@@ -104,7 +104,6 @@ export class AddSpendComponent implements OnInit {
       this.user.costCategories.push(objectToGive);
       this.User_service.saveEditedCategoriesToFirebase(this.user)
         .then((result) => {
-          console.log(result);
           this.notifier.notify('success', `
           Great, you have successfully added ${objectToGive.name} to your cost categories!
           Remember, you can edit your cost categories under your profile settings.
