@@ -30,7 +30,7 @@ export class ChartComponent implements OnInit {
     // Watch modofications
     this.Spends_Service.subject.subscribe(response => {
       this.chart.destroy();
-      console.log('kap adatot');
+
       this.getSpends();
     });
   }
@@ -115,7 +115,6 @@ export class ChartComponent implements OnInit {
     this.pieChartKeys = Object.keys(reducedArr);
     this.pieChartValues = Object.values(reducedArr);
     if (this.pieChartValues.length > 0) {
-      console.log(this.pieChartValues);
       this.getChart();
     }
   }

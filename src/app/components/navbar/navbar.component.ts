@@ -12,6 +12,8 @@ export class NavbarComponent implements OnInit {
   isToggled = false;
   menuIcon;
   mobileNav;
+  isProfilePicAvailable = false;
+  profilePic;
 
   constructor(private Auth: AuthService) { }
 
@@ -20,10 +22,8 @@ export class NavbarComponent implements OnInit {
     this.mobileNav = document.querySelector('.opened-navbar');
     // this.mobileNav.style.display = 'none';
     this.mobileNav.style.transform = 'translateX(-100%)';
+    this.getProfilePic();
 
-  this.Auth.afAuth.user.subscribe(user => {
-    console.log(user.photoURL);
-  });
 
 
   }
@@ -45,6 +45,16 @@ export class NavbarComponent implements OnInit {
 
   public signOut() {
     this.Auth.signOut();
+  }
+
+  getProfilePic() {
+    this.Auth.afAuth.user.subscribe(user => {
+
+      if (user.photoURL != null) {
+        this.isProfilePicAvailable = true;
+        this.profilePic = user.photoURL;
+      }
+    });
   }
 
 

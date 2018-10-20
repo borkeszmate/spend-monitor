@@ -82,9 +82,9 @@ export class LoginComponent implements OnInit {
 
       this.Auth.login(this.registerEmail, this.registerPassword).then(
         loginResponse => {
+          this.User_service.addUserToFirebase();
           // When user is registered und succesfully signed in
           //  --> Create a user node in the database, navigate to homepage and display a welcome messega
-          this.User_service.addUserToFirebase();
           this.router.navigate(['']);
           this.notifier.notify('success', `Hi! You have successfully logged in as ${this.registerEmail}`);
         }
@@ -151,7 +151,8 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['']);
         }
     });
-  })
+  }
+    )
     .catch(err => {
       console.log(err.message);
       this.notifier.notify('warning', `${err.message}`);

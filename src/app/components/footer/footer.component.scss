@@ -1,19 +1,33 @@
 @import '../../../styles.scss';
 
 .footer{
- height: 10rem;
- background-color: $color-primary-light;
+ // height: 13rem;
+ background-color: $color-dark-slate;
+ display: flex;
+ align-items: center;
  &__container{
   display: flex;
+  width: 75%;
+  margin: 8rem auto;
+  // background-color: red;
+  justify-content: space-between;
   
- }
- &__title{
+  &__title{
+   display: flex;
+   align-items: center;
+   text-align: center;
+   font-size: 3rem;
+   color: white;
 
- }
- &__logos{
-  display: flex;
-  img{
-   width: 10%;
+  }
+  &__img{
+   display: flex;
+   align-items: center;
+   img{
+    height: 5rem;
+   }
   }
  }
+
+
 }

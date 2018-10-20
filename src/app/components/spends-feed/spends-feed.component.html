@@ -5,13 +5,32 @@
   <img src="../../../assets/img/loader.gif" alt="">
 </div>
 
-  <div class="container" *ngIf="expensesLoaded">
+  <div class="container" *ngIf="!expensesAdded">
+    <div class="balance-total">
+      <div class="balance-total__spend">
+        <h1>No spend to show yet! Click on add spends!</h1>
+  
+      </div>
+    </div>
+
+    <!-- Add spend btn -->
+    <div class="add-spend" (click)="addSpendRoute()">
+      <div class="add-spend__icon">
+    
+        <i class="fas fa-plus"></i>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="container" *ngIf="expensesLoaded && expensesAdded">
     <div class="balance-total">
       <div class="balance-total__spend">
         <h1>Your total spend: {{totalSpend | currency : 'HUF' : 'symbol' : '1.0' }}</h1>
 
       </div>
     </div>
+
     
 
     

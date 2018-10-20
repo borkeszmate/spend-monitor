@@ -23,10 +23,24 @@
    flex:1;
    display: flex; 
    justify-content: flex-end;
+  //  background-color: yellow;
+
+   &__profilePic{
+     
+    display: flex;
+    align-items: center;
+    // background-color: red;
+    height: 6rem;
+    img{
+      cursor: pointer;
+       height: 100%;
+       border-radius: 50%;
+     }
+   }
    
     
    &__nav-container{
-   
+  //  background-color: blue;
     display: flex;
     margin: 4rem 2rem;
     justify-content: flex-end;

@@ -38,6 +38,13 @@
     
     <div class="nav__navigation">
       <ul class="nav__navigation__nav-container">
+        
+        <div class="nav__navigation__profilePic">
+          <img src="../../../assets/img/profile_pic.png" alt="Default Profile picture" *ngIf="!isProfilePicAvailable" [routerLink]="['/user']" routerLinkActive="router-link-active">
+        </div>
+        <div class="nav__navigation__profilePic">
+          <img src="{{profilePic}}" alt="Default Profile picture" *ngIf="isProfilePicAvailable" [routerLink]="['/user']" routerLinkActive="router-link-active">
+        </div>
 
         <li class="nav__navigation__nav-container__nav-item">
           <div class="nav__navigation__nav-container__nav-item__hamburger">

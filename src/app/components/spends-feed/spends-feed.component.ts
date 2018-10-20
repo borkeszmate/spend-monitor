@@ -27,6 +27,7 @@ export class SpendsFeedComponent implements OnInit {
   editToggler = false;
   editArea;
   totalSpend: number;
+  expensesAdded = false;
 
   user: User = {
     id: '',
@@ -62,11 +63,13 @@ export class SpendsFeedComponent implements OnInit {
     this.getUser();
     this.getSpends();
     this.editArea = document.querySelector('#edit');
-    console.log(this.editArea);
       this.editDate =  document.querySelector('.edit__form__date');
       this.EditDateToggler = document.querySelector('.edit__form__dateToggler');
       this.createEditForm('');
 
+    // this.Auth.afAuth.user.subscribe( response => {
+    //   // console.log(response);
+    // });
 
     }
 
@@ -92,7 +95,7 @@ export class SpendsFeedComponent implements OnInit {
         this.user.id = snapshot.val().id;
         this.user.email = snapshot.val().email;
         this.user.costCategories = snapshot.val().costCategories;
-        // console.log(this.user);
+
       });
 
     });
@@ -107,13 +110,21 @@ export class SpendsFeedComponent implements OnInit {
           this.Auth.userdId = value.uid;
 
           this.Spends_Service.getSpendsFromFirebase().once('value', (snapshot) => {
+            if (snapshot.exists()) {
+              this.expenses = this.snapshotToArray(snapshot);
+              this.expensesLoaded = true;
+              this.calculateTotalSpend();
+              this.expensesAdded = true;
 
-            this.expenses = this.snapshotToArray(snapshot);
-            this.expensesLoaded = true;
-            this.calculateTotalSpend();
+            } else {
+              this.expensesLoaded = true;
+            }
+
           });
         },
-        (error) => error,
+        (error) => {
+          console.log(error);
+        },
 
       );
 
@@ -179,7 +190,7 @@ export class SpendsFeedComponent implements OnInit {
     // console.log(key);
     this.Spends_Service.editSpendInFirebase(key, editedExpense)
     .then(response => {
-      console.log(response);
+
       this.notifier.notify('success', `
           Great, you have successfully modified your expense!
           `);
