@@ -150,7 +150,8 @@ export class LoginComponent implements OnInit {
           this.notifier.notify('success', `Hi! You have successfully logged in as ${credentials.user.displayName}`);
           this.router.navigate(['']);
         }
-    }))
+    });
+  })
     .catch(err => {
       console.log(err.message);
       this.notifier.notify('warning', `${err.message}`);

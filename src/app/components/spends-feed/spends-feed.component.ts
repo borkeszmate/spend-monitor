@@ -185,6 +185,9 @@ export class SpendsFeedComponent implements OnInit {
           `);
       this.editToggle('');
       this.getSpends();
+
+      // Emit event to subject in order to trigger instant diagram recalculation
+      this.Spends_Service.subject.next();
     })
     .catch(err => {
       console.log(err);

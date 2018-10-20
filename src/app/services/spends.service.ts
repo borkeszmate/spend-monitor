@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { Subject } from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class SpendsService {
-
+  subject: Subject<any>;
   constructor(
     private Auth: AuthService,
     private db: AngularFireDatabase
-    ) { }
+    ) {
+    this.subject = new Subject;
+    }
 
   addSpendToFirebase(spend) {
     return this.db.database.ref(`spends/${this.Auth.userdId}`).push({

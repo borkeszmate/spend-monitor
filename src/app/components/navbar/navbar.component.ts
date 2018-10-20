@@ -21,7 +21,9 @@ export class NavbarComponent implements OnInit {
     // this.mobileNav.style.display = 'none';
     this.mobileNav.style.transform = 'translateX(-100%)';
 
-
+  this.Auth.afAuth.user.subscribe(user => {
+    console.log(user.photoURL);
+  });
 
 
   }
@@ -44,6 +46,8 @@ export class NavbarComponent implements OnInit {
   public signOut() {
     this.Auth.signOut();
   }
+
+
 
 
 }
