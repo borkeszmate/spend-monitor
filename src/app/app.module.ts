@@ -15,6 +15,10 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { SpendsFeedComponent } from './components/spends-feed/spends-feed.component';
 import { AddSpendComponent } from './components/add-spend/add-spend.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { UserComponent } from './components/user/user.component';
+import { ChartComponent } from './components/chart/chart.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 // Services
 import { AuthService } from './services/auth.service';
@@ -22,10 +26,6 @@ import { SpendsService } from './services/spends.service';
 
 // Router
 import { Routes, RouterModule } from '@angular/router';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { UserComponent } from './components/user/user.component';
-import { ChartComponent } from './components/chart/chart.component';
-import { FooterComponent } from './components/footer/footer.component';
 
 
 

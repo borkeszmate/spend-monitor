@@ -6,6 +6,8 @@ import { PasswordValidation } from '../../validators/password.validator';
 import { NotifierService } from 'angular-notifier';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { auth } from 'firebase/app';
+
 
 @Component({
   selector: 'app-login',
@@ -122,6 +124,37 @@ export class LoginComponent implements OnInit {
   }
 
 
+  // Login with Google
 
+  googleLogin() {
+    console.log('google click');
+    const provider = new auth.GoogleAuthProvider();
+    return this.oAuthLogin(provider);
+  }
+
+
+  private oAuthLogin(provider) {
+    return this.Auth.afAuth.auth.signInWithPopup(provider)
+    .then(credentials => {
+      // console.log(credentials);
+      this.User_service.getUserDetailsFromFirebase()
+      .subscribe(user => {
+        const userId = user.uid;
+// Check if user node exists in db. If not create.
+        if (this.User_service.checkIfUserExist(userId)) {
+          this.notifier.notify('success', `Hi! You have successfully logged in as ${credentials.user.displayName}`);
+          this.router.navigate(['']);
+
+        } else {
+          this.User_service.addUserToFirebase();
+          this.notifier.notify('success', `Hi! You have successfully logged in as ${credentials.user.displayName}`);
+          this.router.navigate(['']);
+        }
+    }))
+    .catch(err => {
+      console.log(err.message);
+      this.notifier.notify('warning', `${err.message}`);
+    });
+  }
 
 }

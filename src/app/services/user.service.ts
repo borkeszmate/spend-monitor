@@ -98,4 +98,14 @@ export class UserService {
     });
   }
 
+  checkIfUserExist(id) {
+    this.db.database.ref(`users/${id}`).once('value', (snapshot) => {
+      if (snapshot.exists()) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
+
 }
