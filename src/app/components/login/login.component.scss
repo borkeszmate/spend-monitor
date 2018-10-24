@@ -37,6 +37,10 @@
       img{
         width: 15%;
         cursor: pointer;
+
+        @media only screen and (max-width:50em) {
+          width: 60%;
+        }
       }
     }
     

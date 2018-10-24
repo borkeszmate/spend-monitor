@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { User } from '../../interfaces/user';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormsModule } from '@angular/forms';
 
 // Notification
 import { NotifierService } from 'angular-notifier';
@@ -37,12 +37,7 @@ export class SpendsFeedComponent implements OnInit {
   editForm: FormGroup;
   editDate;
   EditDateToggler;
-
-  // editedItem = {
-  //   amount: null,
-  //   category: '',
-  //   date: null
-  // };
+  datePickerForm;
 
   private readonly notifier: NotifierService;
   constructor(
@@ -62,14 +57,15 @@ export class SpendsFeedComponent implements OnInit {
     this.Auth.checkIfLoggedIn();
     this.getUser();
     this.getSpends();
+    // Create edit area
     this.editArea = document.querySelector('#edit');
-      this.editDate =  document.querySelector('.edit__form__date');
-      this.EditDateToggler = document.querySelector('.edit__form__dateToggler');
-      this.createEditForm('');
+    this.editDate =  document.querySelector('.edit__form__date');
+    this.EditDateToggler = document.querySelector('.edit__form__dateToggler');
+    this.createEditForm('');
 
-    // this.Auth.afAuth.user.subscribe( response => {
-    //   // console.log(response);
-    // });
+    // Create date picker form
+    this.createDatePickerForm();
+
 
     }
 
@@ -111,7 +107,7 @@ export class SpendsFeedComponent implements OnInit {
 
           this.Spends_Service.getSpendsFromFirebase().once('value', (snapshot) => {
             if (snapshot.exists()) {
-              this.expenses = this.snapshotToArray(snapshot);
+              this.expenses = this.snapshotToArray(snapshot).reverse();
               this.expensesLoaded = true;
               this.calculateTotalSpend();
               this.expensesAdded = true;
@@ -162,6 +158,10 @@ export class SpendsFeedComponent implements OnInit {
     }
   }
 
+
+/******** Forms *******/
+
+// Edit form
   createEditForm(expense) {
     const time = expense.date;
     this.editForm = new FormGroup({
@@ -172,11 +172,14 @@ export class SpendsFeedComponent implements OnInit {
     });
   }
 
+// Edit form
   toggleEditDate(e) {
 
     this.editDate.style.display = 'block';
     this.EditDateToggler.style.display = 'none';
   }
+
+
 
   saveEditedExpense() {
     let date = this.editForm.value.date;
@@ -207,6 +210,8 @@ export class SpendsFeedComponent implements OnInit {
 
   }
 
+
+
   deleteSpend(key) {
     this.Spends_Service.deleteSpendFromFirebase(key)
     .then(response => {
@@ -219,6 +224,9 @@ export class SpendsFeedComponent implements OnInit {
     } );
   }
 
+
+
+
   calculateTotalSpend() {
     const allAmounts = [];
     this.expenses.forEach(expense => {
@@ -229,4 +237,23 @@ export class SpendsFeedComponent implements OnInit {
     });
   }
 
+
+
+  // Datepicker form
+  createDatePickerForm() {
+    this.datePickerForm = new FormGroup({
+      fromDate : new FormControl('', [Validators.required]),
+      toDate: new FormControl('', [Validators.required]),
+    });
+  }
+
+  datePickerSubmit() {
+    const fromDate = this.datePickerForm.value.fromDate.getTime();
+    const toDate = this.datePickerForm.value.toDate.getTime() + 86400000;
+    this.expenses = this.expenses.filter(expense => {
+
+     return ( expense.date >= fromDate && expense.date <= toDate);
+    });
+    this.Spends_Service.subject.next();
+  }
 }

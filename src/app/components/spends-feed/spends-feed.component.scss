@@ -46,6 +46,22 @@
 
 }
 
+.expense-date-filter{
+
+  margin: 0rem auto;
+  font-size: 1.5rem;
+  padding: 2rem 0;
+  width: 70%;
+  cursor: pointer;
+  text-align: right;
+  mat-form-field{
+    margin-right: 2rem;
+  }
+  @media only screen and (max-width: 50em) {
+   width: 95%;
+  } 
+
+}
 
 .expense{
   display: flex;

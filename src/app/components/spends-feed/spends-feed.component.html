@@ -48,6 +48,28 @@
 
   <!-- Expenses -->
   <section class="expenses-container" *ngIf="expensesLoaded">
+    
+    <!-- Datepicker -->
+    <div class="expense-date-filter">
+
+      <form [formGroup]="datePickerForm" (ngSubmit)="datePickerSubmit()" >
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker1" placeholder="Choose a from date" formControlName="fromDate">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+  
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker2" placeholder="Choose a to date" formControlName="toDate">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+  
+        <input type="submit" value="Set date" class="btn-primary" [disabled]="!datePickerForm.valid">  
+      </form>
+      
+    </div>
+
 
     <div class="expense" *ngFor="let expense of expenses" (click)="editToggle(expense)" >
         <div class="expense__category" >

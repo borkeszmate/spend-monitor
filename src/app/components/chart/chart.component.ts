@@ -33,6 +33,9 @@ export class ChartComponent implements OnInit {
 
       this.getSpends();
     });
+
+    const date = new Date;
+
   }
 
   getSpends() {
