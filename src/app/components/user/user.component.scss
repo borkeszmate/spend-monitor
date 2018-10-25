@@ -12,6 +12,9 @@
  align-items: center;
  justify-content: space-between;
  background-color: white;
+ border-radius: 12px;
+ box-shadow: 8px 9px 5px -5px rgba(0,0,0,0.15);
+ transition: all .3s;
   @media only screen and (max-width: 50em) {
    width: 95%;
   } 
@@ -46,6 +49,11 @@
   font-size: 2.2rem;
   transition: all .3s;
  }
+}
+
+.user-spend:hover{
+  background-color: $color-primary-light;
+  transition: all .3s;
 }
 
 

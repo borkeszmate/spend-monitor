@@ -54,7 +54,9 @@
 
     &__input-radio{
       
+      
       label{
+       
         display: flex;
         background-color: white;
         margin: 1rem 0;
@@ -63,6 +65,7 @@
         justify-content: space-between;
         align-items: center;
         text-transform: uppercase;
+        
       }
         &__field{
           

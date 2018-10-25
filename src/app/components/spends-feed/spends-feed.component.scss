@@ -74,6 +74,8 @@
   width: 70%;
   cursor: pointer;
   margin-bottom: 1rem;
+  border-radius: 12px;
+  box-shadow: 8px 9px 5px -5px rgba(0,0,0,0.15);
   @media only screen and (max-width: 50em) {
    width: 95%;
   } 
