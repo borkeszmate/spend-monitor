@@ -10,6 +10,12 @@
   width: 100%;
 }
 
+.expenses-container{
+  margin-top: -15rem;
+  @media only screen and (max-width:50em) {
+    margin-top: -20rem;
+  }
+}
 .balance-total{
   width: 40%;
   margin: 2rem auto;
@@ -56,10 +62,22 @@
   text-align: right;
   mat-form-field{
     margin-right: 2rem;
+
+    @media only screen and (max-width:50em) {
+      margin: 2rem 1rem;
+      width: 100%;
+      display: block;
+    }
   }
   @media only screen and (max-width: 50em) {
    width: 95%;
+   input{
+     width: 100%;
+     display: block;
+   }
   } 
+
+
 
 }
 
@@ -145,6 +163,23 @@
   }
 
 }
+
+.activeFilter {
+  margin: 2rem 0;
+  // background-color: red;
+  padding: 2rem 0; 
+  text-align: center;
+  h4{
+    font-size: 2rem;
+    margin: 2rem 0;
+    font-weight: 300;
+  }
+  button{
+    margin: 2rem 0;
+  }
+}
+
+
 .edit{
   transform: translateX(100%);
   position: fixed;

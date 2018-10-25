@@ -70,9 +70,45 @@
       
     </div>
 
+<!-- No expenses filter is inactive -->
+    <div id="notFiltered" *ngIf="!isFilterActive" >
+      <div class="expense"
+      *ngFor="let expense of expenses"
+        (click)="editToggle(expense)">
+          <div class="expense__category" >
+            <div class="expense__category__icon">
+              <div class="expense__category__icon__bg">
+                <img src="../../../assets/img/{{expense.category}}.svg" alt="{{expense.category}}">
+              </div>
+            </div>
+            <div class="expense__category__name">
+              <p>{{expense.category}}</p>
+            </div>
+          </div>
 
-    <div class="expense" *ngFor="let expense of expenses" (click)="editToggle(expense)" >
-        <div class="expense__category" >
+          <div class="expense__amount-date">
+            <div class="expense__amount-date__amount">
+              <p>{{expense.amount | currency : 'HUF' : 'symbol' : '1.0'  }}</p>
+            </div>
+
+            <div class="expense__amount-date__date">
+              {{expense.date | date: 'yyyy.MM.dd.'}}
+            </div>
+          </div>
+          <div class="expense__edit">
+            <i class="fas fa-pen"></i>
+          </div>
+      </div>
+    </div>
+
+    <!-- Expense filter is active -->
+    <div class="activeFilter" *ngIf="isFilterActive">
+      <h4>Current filter is from {{fromDate | date: 'yyyy.MM.dd.'}} to {{toDate | date: 'yyyy.MM.dd.'}}  </h4>
+      <button class="btn-info" (click)="clearDateFilter()">Clear filter</button>
+
+      <h5 *ngIf="filteredExpenses.length === 0" class="expense"> No spends are found in the selected date range</h5>
+      <div class="expense" *ngFor="let expense of filteredExpenses" (click)="editToggle(expense)">
+        <div class="expense__category">
           <div class="expense__category__icon">
             <div class="expense__category__icon__bg">
               <img src="../../../assets/img/{{expense.category}}.svg" alt="{{expense.category}}">
@@ -82,12 +118,12 @@
             <p>{{expense.category}}</p>
           </div>
         </div>
-
+    
         <div class="expense__amount-date">
           <div class="expense__amount-date__amount">
-            <p>{{expense.amount | currency : 'HUF' : 'symbol' : '1.0'  }}</p>
+            <p>{{expense.amount | currency : 'HUF' : 'symbol' : '1.0' }}</p>
           </div>
-
+    
           <div class="expense__amount-date__date">
             {{expense.date | date: 'yyyy.MM.dd.'}}
           </div>
@@ -95,7 +131,7 @@
         <div class="expense__edit">
           <i class="fas fa-pen"></i>
         </div>
-      
+      </div>
     </div>
 
   </section>

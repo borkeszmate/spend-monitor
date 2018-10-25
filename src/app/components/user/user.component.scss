@@ -114,6 +114,8 @@
   
   &__btn{
     font-size: 2.5rem !important;
+    border-radius: 12px;
+    box-shadow: 8px 9px 5px -5px rgba(0,0,0,0.15);
   }
 }
 
@@ -146,12 +148,15 @@
     background-color: $color-primary;
     padding: 2rem;
     transform: translate(-50%,-50%);
+    border-radius: 12px;
+    box-shadow: 8px 9px 5px -5px rgba(0,0,0,0.15);
     @media only screen and (max-width:50em) {
       left: 0;
       transform: translate(0,-50%);
     }
       &__options{
         display: flex;
+
         &__restore{
             background-color: $color-red-primary;
             padding: .7rem 1.5rem; 
@@ -161,7 +166,8 @@
             font-size: 1.7rem;
             margin-right: 1rem;
             cursor: pointer;
-                      
+            border-radius: 12px;
+            // box-shadow: 8px 9px 5px -5px rgba(0,0,0,0.15);          
           }
         &__cancel{
             background-color: $color-yellow-1;
@@ -171,6 +177,8 @@
             text-transform: uppercase;
             font-size: 1.7rem;
             cursor: pointer;
+            border-radius: 12px;
+            // box-shadow: 8px 9px 5px -5px rgba(0,0,0,0.15);
         }
       }  
     

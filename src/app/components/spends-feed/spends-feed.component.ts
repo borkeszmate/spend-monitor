@@ -20,24 +20,33 @@ import { NotifierService } from 'angular-notifier';
 })
 export class SpendsFeedComponent implements OnInit {
 
-  // Properties
+  // Regular expense proterties
   expenses;
-  openedExpense;
   expensesLoaded = false;
+  expensesAdded = false;
+  totalSpend: number;
+
+// Expense edit related properties
+  openedExpense;
   editToggler = false;
   editArea;
-  totalSpend: number;
-  expensesAdded = false;
 
   user: User = {
     id: '',
     email: '',
     costCategories: []
   };
+
+// Date filter related
   editForm: FormGroup;
   editDate;
   EditDateToggler;
   datePickerForm;
+  isFilterActive = false;
+  filteredExpenses;
+  fromDate;
+  toDate;
+
 
   private readonly notifier: NotifierService;
   constructor(
@@ -109,8 +118,13 @@ export class SpendsFeedComponent implements OnInit {
             if (snapshot.exists()) {
               this.expenses = this.snapshotToArray(snapshot).reverse();
               this.expensesLoaded = true;
-              this.calculateTotalSpend();
+              this.calculateTotalSpend(this.expenses);
               this.expensesAdded = true;
+
+              // Create filtered array if filtetered
+              if (this.isFilterActive) {
+                this.createFilteredExpensesArray(this.expenses, this.fromDate, this.toDate);
+              }
 
             } else {
               this.expensesLoaded = true;
@@ -139,7 +153,6 @@ export class SpendsFeedComponent implements OnInit {
   }
 
   // Edit feed
-
    editToggle(expense) {
     this.editToggler = !this.editToggler;
 
@@ -200,6 +213,7 @@ export class SpendsFeedComponent implements OnInit {
       this.editToggle('');
       this.getSpends();
 
+
       // Emit event to subject in order to trigger instant diagram recalculation
       this.Spends_Service.subject.next();
     })
@@ -218,6 +232,9 @@ export class SpendsFeedComponent implements OnInit {
       this.notifier.notify('info', 'Spend succesfully deleted!');
       this.editToggle('');
       this.getSpends();
+      // Emit event to subject in order to trigger instant diagram recalculation
+      this.Spends_Service.subject.next();
+
     })
     .catch(err => {
       this.notifier.notify('warning', 'Something went wrong. Please, try again!');
@@ -227,9 +244,9 @@ export class SpendsFeedComponent implements OnInit {
 
 
 
-  calculateTotalSpend() {
+  calculateTotalSpend(expenses) {
     const allAmounts = [];
-    this.expenses.forEach(expense => {
+    expenses.forEach(expense => {
       allAmounts.push(expense.amount);
     });
     this.totalSpend = allAmounts.reduce((acc, item) => {
@@ -248,12 +265,31 @@ export class SpendsFeedComponent implements OnInit {
   }
 
   datePickerSubmit() {
-    const fromDate = this.datePickerForm.value.fromDate.getTime();
-    const toDate = this.datePickerForm.value.toDate.getTime() + 86400000;
-    this.expenses = this.expenses.filter(expense => {
+    this.filteredExpenses = '';
+    this.isFilterActive = true;
+    this.fromDate = this.datePickerForm.value.fromDate.getTime();
+    this.toDate = this.datePickerForm.value.toDate.getTime() + 86399999;
 
-     return ( expense.date >= fromDate && expense.date <= toDate);
-    });
+    this.createFilteredExpensesArray(this.expenses, this.fromDate, this.toDate);
+    if (this.filteredExpenses.length > 0) {
+
+      this.calculateTotalSpend(this.filteredExpenses);
+    }
+
     this.Spends_Service.subject.next();
+  }
+
+
+  createFilteredExpensesArray(expenses, fromDate, toDate) {
+    this.filteredExpenses = expenses.filter(expense => {
+
+      return (expense.date >= fromDate && expense.date <= toDate);
+    });
+  }
+
+
+  clearDateFilter() {
+    // this.filteredExpenses = '';
+    this.isFilterActive = false;
   }
 }
