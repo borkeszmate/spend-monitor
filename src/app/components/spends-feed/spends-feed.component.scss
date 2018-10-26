@@ -81,6 +81,60 @@
 
 }
 
+.default-range{
+  margin: 3rem auto;
+  width: 70%;
+  display: flex;
+
+  @media only screen and (max-width:50em) {
+    width: 95%;
+  }
+
+  &__btn{
+    flex: 1;
+    
+  }
+  button, :focus{
+    width: 100%;
+    border: none;
+    padding: 1rem;
+    color: white;
+    outline: none;
+  }
+  
+    &__all-time{
+      background-color: rgba($color-blue,0.4);
+      border-top-left-radius: 12px;
+      border-bottom-left-radius: 12px;
+    }
+    &__all-time:focus{
+      background-color: rgba($color-blue,1);
+    }    
+
+    &__this-month{
+    background-color: rgba($color-maroon-1,0.4);
+    }
+    &__this-month:focus{
+    background-color: rgba($color-maroon-1,1);
+    }
+
+    &__yesterday{
+      background-color: rgba($color-orange-1,0.4);
+    }
+    &__yesterday:focus{
+      background-color: rgba($color-orange-1,1);
+    }
+
+    &__today{
+      border-top-right-radius: 12px;
+      border-bottom-right-radius: 12px;
+      background-color: rgba($color-fuchsia-1,0.4);
+    }
+    &__today:focus{
+      background-color: rgba($color-fuchsia-1,1);
+    }    
+}
+
 .expense{
   display: flex;
   margin: 0rem auto;
