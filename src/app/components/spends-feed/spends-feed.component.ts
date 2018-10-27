@@ -63,6 +63,9 @@ export class SpendsFeedComponent implements OnInit {
   todayEnd: number;
 
 
+  focus;
+
+
   private readonly notifier: NotifierService;
   constructor(
     private Auth: AuthService,
@@ -90,6 +93,8 @@ export class SpendsFeedComponent implements OnInit {
 
     // Create date picker form
     this.createDatePickerForm();
+
+    // this.focus = document.querySelector('.default-range__this-month');
 
 
   }
@@ -145,6 +150,8 @@ export class SpendsFeedComponent implements OnInit {
               this.expensesAdded = true;
 
               this.getThisMonth();
+              console.log(this.expenses);
+
 
               // Create filtered array if filtetered
               if (this.isFilterActive) {
@@ -155,6 +162,9 @@ export class SpendsFeedComponent implements OnInit {
             } else {
               this.expensesLoaded = true;
             }
+
+            this.focus = document.querySelector('.default-range__this-month');
+
 
           });
         },

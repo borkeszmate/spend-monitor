@@ -31,13 +31,15 @@ export class AddSpendComponent implements OnInit {
   isCategoriesLoaded = false;
   isCategoriesEdited = false;
   private readonly notifier: NotifierService;
+  defaultCostCategoryNames = [];
 
   addForm: FormGroup;
   spend: Spend = {
     amount: 0,
     category: '',
     date: 0,
-    img: ''
+    img: '',
+    isDefault: true
   };
 
   constructor(
@@ -64,8 +66,13 @@ export class AddSpendComponent implements OnInit {
         this.user.id = snapshot.val().id;
         this.user.email = snapshot.val().email;
         this.user.costCategories = snapshot.val().costCategories;
+        this.User_service.defaultCostCategories.forEach(category => {
+          // @ts-ignore
+          this.defaultCostCategoryNames.push(category.name);
 
+        });
         this.isCategoriesLoaded = true;
+
       });
 
     });
@@ -85,6 +92,16 @@ export class AddSpendComponent implements OnInit {
     this.spend.category = this.addForm.value.category;
     this.spend.date = new Date().getTime();
 
+    if (this.defaultCostCategoryNames.includes(this.spend.category)) {
+      this.spend.img = `../../../assets/img/${this.addForm.value.category}.svg`;
+      // this.spend.isDefault = true;
+
+    } else {
+      // this.spend.isDefault = false;
+      this.spend.img = '../../../assets/img/Other.svg';
+
+    }
+    console.log(this.spend);
 
 
     this.Spends_Service.addSpendToFirebase(this.spend)
@@ -98,7 +115,8 @@ export class AddSpendComponent implements OnInit {
     if (this.addedCategory != null ) {
       const objectToGive =  {
        name : this.addedCategory.toString(),
-       img: '../../../assets/img/Other.svg'
+       img: '../../../assets/img/Other.svg',
+       isDefault: false
       };
       // console.log(objectToGive);
       this.user.costCategories.push(objectToGive);

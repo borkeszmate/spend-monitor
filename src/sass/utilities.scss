@@ -30,10 +30,11 @@
  cursor: pointer;
  border-radius: 12px;
  box-shadow: 8px 9px 5px -5px rgba(0,0,0,0.15);
-  @media only screen and (max-width: 30em) {
+  @media only screen and (max-width: 50em) {
   display: block;      
   text-align: center;
-  margin: .4rem 0;
+  margin: .4rem auto;
+  width: 95%;
   }    
 }
 
@@ -48,10 +49,11 @@
  border-radius: 12px;
  box-shadow: 8px 9px 5px -5px rgba(0,0,0,0.15);
  cursor: pointer;
-  @media only screen and (max-width: 30em) {
-  display: block;      
+  @media only screen and (max-width: 50em) {
+  // display: block;      
   text-align: center;
-  margin: .4rem 0;
+  // margin: .4rem auto;
+  width: 95%;
   }    
 }
 
@@ -66,10 +68,11 @@
  border-radius: 12px;
  box-shadow: 8px 9px 5px -5px rgba(0,0,0,0.15);
  cursor: pointer;
-  @media only screen and (max-width: 30em) {
+  @media only screen and (max-width: 50em) {
   display: block;      
   text-align: center;
-  margin: .4rem 0;
+  margin: .4rem auto;
+  width: 95%;
   }    
 }
 // .btn-primary:hover{

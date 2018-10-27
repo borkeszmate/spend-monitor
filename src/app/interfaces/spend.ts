@@ -3,4 +3,5 @@ export interface Spend {
   category: string;
   date: number;
   img: string;
+  isDefault: boolean;
 }

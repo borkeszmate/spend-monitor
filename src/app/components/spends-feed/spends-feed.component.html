@@ -84,7 +84,7 @@
       </div>
 
       <div class="default-range__btn">
-        <button class="default-range__this-month" (click)="getThisMonth()">This month</button>
+        <button class="default-range__this-month" id="this-month-btn" (click)="getThisMonth()">This month</button>
       </div>
 
       <div class="default-range__btn">
@@ -105,7 +105,7 @@
           <div class="expense__category" >
             <div class="expense__category__icon">
               <div class="expense__category__icon__bg">
-                <img src="../../../assets/img/{{expense.category}}.svg" alt="{{expense.category}}">
+                <img src="{{expense.img}}" alt="{{expense.category}}">
               </div>
             </div>
             <div class="expense__category__name">
@@ -138,7 +138,8 @@
         <div class="expense__category">
           <div class="expense__category__icon">
             <div class="expense__category__icon__bg">
-              <img src="../../../assets/img/{{expense.category}}.svg" alt="{{expense.category}}">
+              <img src="{{expense.img}}" alt="{{expense.category}}">
+
             </div>
           </div>
           <div class="expense__category__name">
@@ -205,3 +206,4 @@
     </div>
   </div>
   <app-footer></app-footer>
+

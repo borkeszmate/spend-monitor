@@ -21,6 +21,7 @@ export class SpendsService {
       amount: spend.amount,
       date: spend.date,
       category: spend.category,
+      img: spend.img
     });
   }
 
