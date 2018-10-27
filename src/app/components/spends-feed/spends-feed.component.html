@@ -93,10 +93,10 @@
 
     </div>
 
-<!-- No expenses filter is inactive -->
+<!-- Expenses filter is inactive -->
     <div id="notFiltered" *ngIf="!isFilterActive" >
       <div class="expense"
-      *ngFor="let expense of expenses"
+      *ngFor="let expense of starterExpenses"
         (click)="editToggle(expense)">
           <div class="expense__category" >
             <div class="expense__category__icon">

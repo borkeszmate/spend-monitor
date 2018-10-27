@@ -9,6 +9,7 @@ import { FormGroup, FormControl, Validators, FormsModule } from '@angular/forms'
 
 // Notification
 import { NotifierService } from 'angular-notifier';
+import { getLocaleTimeFormat } from '@angular/common';
 
 
 
@@ -25,6 +26,7 @@ export class SpendsFeedComponent implements OnInit {
   expensesLoaded = false;
   expensesAdded = false;
   totalSpend: number;
+  starterExpenses;
 
 // Expense edit related properties
   openedExpense;
@@ -47,6 +49,19 @@ export class SpendsFeedComponent implements OnInit {
   fromDate;
   toDate;
 
+  // Dates
+  thisMonthStart: number;
+  thisMonthEnd: number;
+
+  lastMonthStart: number;
+  lastMonthEnd: number;
+
+  yesterdayStart: number;
+  yesterdayEnd: number;
+
+  todayStart: number;
+  todayEnd: number;
+
 
   private readonly notifier: NotifierService;
   constructor(
@@ -59,6 +74,7 @@ export class SpendsFeedComponent implements OnInit {
     ) {
     this.notifier = notifierService;
     }
+
 
 
   ngOnInit() {
@@ -75,8 +91,11 @@ export class SpendsFeedComponent implements OnInit {
     // Create date picker form
     this.createDatePickerForm();
 
+    this.getYesterday();
 
-    }
+
+  }
+
 
 
 
@@ -86,9 +105,11 @@ export class SpendsFeedComponent implements OnInit {
 
 
 
+
   addSpendRoute() {
     this.router.navigate(['add']);
   }
+
 
   getUser() {
     // Fetching currenct user's data from firebase
@@ -108,6 +129,8 @@ export class SpendsFeedComponent implements OnInit {
   }
 
 
+
+
   getSpends() {
     this.Auth.getUserId()
       .subscribe(
@@ -117,9 +140,12 @@ export class SpendsFeedComponent implements OnInit {
           this.Spends_Service.getSpendsFromFirebase().once('value', (snapshot) => {
             if (snapshot.exists()) {
               this.expenses = this.snapshotToArray(snapshot).reverse();
+              this.sortByDate(this.expenses);
+              this.starterExpenses = this.expenses;
               this.expensesLoaded = true;
               this.calculateTotalSpend(this.expenses);
               this.expensesAdded = true;
+              // console.log(this.starterExpenses);
 
               // Create filtered array if filtetered
               if (this.isFilterActive) {
@@ -140,6 +166,8 @@ export class SpendsFeedComponent implements OnInit {
 
   }
 
+
+// Firebase snapshot to array
   snapshotToArray(snapshot) {
     const returnArr = [];
 
@@ -151,6 +179,8 @@ export class SpendsFeedComponent implements OnInit {
 
     return returnArr;
   }
+
+
 
   // Edit feed
    editToggle(expense) {
@@ -172,7 +202,7 @@ export class SpendsFeedComponent implements OnInit {
   }
 
 
-/******** Forms *******/
+
 
 // Edit form
   createEditForm(expense) {
@@ -184,6 +214,8 @@ export class SpendsFeedComponent implements OnInit {
       key: new FormControl(expense.key, [Validators.required])
     });
   }
+
+
 
 // Edit form
   toggleEditDate(e) {
@@ -264,6 +296,8 @@ export class SpendsFeedComponent implements OnInit {
     });
   }
 
+
+
   datePickerSubmit() {
     this.filteredExpenses = '';
     this.isFilterActive = true;
@@ -271,6 +305,7 @@ export class SpendsFeedComponent implements OnInit {
     this.toDate = this.datePickerForm.value.toDate.getTime() + 86399999;
 
     this.createFilteredExpensesArray(this.expenses, this.fromDate, this.toDate);
+    this.sortByDate(this.filteredExpenses);
     if (this.filteredExpenses.length > 0) {
 
       this.calculateTotalSpend(this.filteredExpenses);
@@ -278,6 +313,8 @@ export class SpendsFeedComponent implements OnInit {
 
     this.Spends_Service.subject.next();
   }
+
+
 
 
   createFilteredExpensesArray(expenses, fromDate, toDate) {
@@ -288,8 +325,60 @@ export class SpendsFeedComponent implements OnInit {
   }
 
 
+
+
   clearDateFilter() {
     // this.filteredExpenses = '';
     this.isFilterActive = false;
   }
+
+  sortByDate(expenses) {
+    expenses.sort((a, b) => {
+      return b.date - a.date;
+    });
+  }
+
+// Get dates
+
+  getThisMonth() {
+    const date = new Date;
+    const actualYear = date.getFullYear();
+    const actualMonth = date.getMonth();
+    this.thisMonthStart = new Date(actualYear, actualMonth).getTime();
+    this.thisMonthEnd = new Date(actualYear, actualMonth).getTime() - 1;
+  }
+  getLastMonth() {
+    const date = new Date;
+    const actualYear = date.getFullYear();
+    const actualMonth = date.getMonth();
+    this.lastMonthStart = new Date(actualYear, actualMonth - 1).getTime();
+    this.lastMonthEnd = new Date(actualYear, actualMonth).getTime() - 1;
+  }
+
+
+
+  getYesterday() {
+    const date = new Date;
+    const actualYear = date.getFullYear();
+    const actualMonth = date.getMonth();
+    const actualDay = date.getDate();
+
+    this.yesterdayStart = new Date(actualYear, actualMonth, actualDay - 1).getTime();
+    this.yesterdayEnd = new Date(actualYear, actualMonth, actualDay).getTime() - 1;
+  }
+
+  getToday() {
+    const date = new Date;
+    const actualYear = date.getFullYear();
+    const actualMonth = date.getMonth();
+    const actualDay = date.getDate();
+
+    this.todayStart = new Date(actualYear, actualMonth, actualDay).getTime();
+    this.todayEnd = new Date().getTime();
+  }
+
+
+
+
+
 }
