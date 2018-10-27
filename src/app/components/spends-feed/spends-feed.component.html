@@ -76,19 +76,23 @@
     <div class="default-range">
       
       <div class="default-range__btn">
-        <button class="default-range__all-time" >All time</button>
+        <button class="default-range__all-time" (click)="clearDateFilter()">All time</button>
       </div>
 
       <div class="default-range__btn">
-        <button class="default-range__this-month">This month</button>
+        <button class="default-range__last-month" (click)="getLastMonth()">Last month</button>
       </div>
 
       <div class="default-range__btn">
-        <button class="default-range__yesterday">Yesterday</button>
+        <button class="default-range__this-month" (click)="getThisMonth()">This month</button>
       </div>
 
       <div class="default-range__btn">
-        <button class="default-range__today">Today</button>
+        <button class="default-range__yesterday" (click)="getYesterday()">Yesterday</button>
+      </div>
+
+      <div class="default-range__btn">
+        <button class="default-range__today" (click)="getToday()">Today</button>
       </div>
 
     </div>

@@ -87,7 +87,8 @@
   display: flex;
 
   @media only screen and (max-width:50em) {
-    width: 95%;
+    width: 97%;
+    padding: 2rem 0;
   }
 
   &__btn{
@@ -100,6 +101,11 @@
     padding: 1rem;
     color: white;
     outline: none;
+    cursor: pointer;
+    
+    @media only screen and (max-width:50em) {  
+      padding: 2rem 0;
+    }
   }
   
     &__all-time{
@@ -111,11 +117,18 @@
       background-color: rgba($color-blue,1);
     }    
 
+    &__last-month{
+    background-color: rgba($color-red-primary,0.4);
+    }
+    &__last-month:focus{
+    background-color: rgba($color-red-primary,1);
+    }
+
     &__this-month{
-    background-color: rgba($color-maroon-1,0.4);
+    background-color: rgba($color-primary-dark,0.4);
     }
     &__this-month:focus{
-    background-color: rgba($color-maroon-1,1);
+    background-color: rgba($color-primary-dark,1);
     }
 
     &__yesterday{

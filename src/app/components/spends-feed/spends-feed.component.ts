@@ -91,8 +91,6 @@ export class SpendsFeedComponent implements OnInit {
     // Create date picker form
     this.createDatePickerForm();
 
-    this.getYesterday();
-
 
   }
 
@@ -145,10 +143,12 @@ export class SpendsFeedComponent implements OnInit {
               this.expensesLoaded = true;
               this.calculateTotalSpend(this.expenses);
               this.expensesAdded = true;
-              // console.log(this.starterExpenses);
+
+              this.getThisMonth();
 
               // Create filtered array if filtetered
               if (this.isFilterActive) {
+
                 this.createFilteredExpensesArray(this.expenses, this.fromDate, this.toDate);
               }
 
@@ -298,20 +298,14 @@ export class SpendsFeedComponent implements OnInit {
 
 
 
+
+
   datePickerSubmit() {
-    this.filteredExpenses = '';
-    this.isFilterActive = true;
+
     this.fromDate = this.datePickerForm.value.fromDate.getTime();
     this.toDate = this.datePickerForm.value.toDate.getTime() + 86399999;
 
-    this.createFilteredExpensesArray(this.expenses, this.fromDate, this.toDate);
-    this.sortByDate(this.filteredExpenses);
-    if (this.filteredExpenses.length > 0) {
-
-      this.calculateTotalSpend(this.filteredExpenses);
-    }
-
-    this.Spends_Service.subject.next();
+    this.filterSpendsByDate();
   }
 
 
@@ -338,21 +332,27 @@ export class SpendsFeedComponent implements OnInit {
     });
   }
 
-// Get dates
 
+// Get dates
   getThisMonth() {
     const date = new Date;
     const actualYear = date.getFullYear();
     const actualMonth = date.getMonth();
-    this.thisMonthStart = new Date(actualYear, actualMonth).getTime();
-    this.thisMonthEnd = new Date(actualYear, actualMonth).getTime() - 1;
+    this.fromDate = new Date(actualYear, actualMonth).getTime();
+    this.toDate = new Date(actualYear, actualMonth + 1).getTime() - 1;
+
+    this.filterSpendsByDate();
   }
+
+
   getLastMonth() {
     const date = new Date;
     const actualYear = date.getFullYear();
     const actualMonth = date.getMonth();
-    this.lastMonthStart = new Date(actualYear, actualMonth - 1).getTime();
-    this.lastMonthEnd = new Date(actualYear, actualMonth).getTime() - 1;
+    this.fromDate = new Date(actualYear, actualMonth - 1).getTime();
+    this.toDate = new Date(actualYear, actualMonth).getTime() - 1;
+
+    this.filterSpendsByDate();
   }
 
 
@@ -363,9 +363,12 @@ export class SpendsFeedComponent implements OnInit {
     const actualMonth = date.getMonth();
     const actualDay = date.getDate();
 
-    this.yesterdayStart = new Date(actualYear, actualMonth, actualDay - 1).getTime();
-    this.yesterdayEnd = new Date(actualYear, actualMonth, actualDay).getTime() - 1;
+    this.fromDate = new Date(actualYear, actualMonth, actualDay - 1).getTime();
+    this.toDate = new Date(actualYear, actualMonth, actualDay).getTime() - 1;
+
+    this.filterSpendsByDate();
   }
+
 
   getToday() {
     const date = new Date;
@@ -373,12 +376,26 @@ export class SpendsFeedComponent implements OnInit {
     const actualMonth = date.getMonth();
     const actualDay = date.getDate();
 
-    this.todayStart = new Date(actualYear, actualMonth, actualDay).getTime();
-    this.todayEnd = new Date().getTime();
+    this.fromDate = new Date(actualYear, actualMonth, actualDay).getTime();
+    this.toDate = new Date().getTime();
+
+    this.filterSpendsByDate();
   }
 
 
 
+  filterSpendsByDate() {
+    this.filteredExpenses = '';
+    this.isFilterActive = true;
 
+    this.createFilteredExpensesArray(this.expenses, this.fromDate, this.toDate);
+    this.sortByDate(this.filteredExpenses);
+    if (this.filteredExpenses.length > 0) {
+
+      this.calculateTotalSpend(this.filteredExpenses);
+    }
+
+    this.Spends_Service.subject.next();
+  }
 
 }
