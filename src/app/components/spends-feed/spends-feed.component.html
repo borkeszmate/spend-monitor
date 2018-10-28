@@ -23,6 +23,8 @@
 
   </div>
 
+
+
   <div class="container" *ngIf="expensesLoaded && expensesAdded">
     <div class="balance-total">
       <div class="balance-total__spend">
@@ -32,7 +34,31 @@
     </div>
 
     
-
+    <!-- Default date ranges -->
+    
+    <div class="default-range">
+    
+      <div class="default-range__btn">
+        <button class="default-range__all-time" (click)="clearDateFilter()">All time</button>
+      </div>
+    
+      <div class="default-range__btn">
+        <button class="default-range__last-month" (click)="getLastMonth()">Last month</button>
+      </div>
+    
+      <div class="default-range__btn">
+        <button class="default-range__this-month" id="this-month-btn" (click)="getThisMonth()">This month</button>
+      </div>
+    
+      <div class="default-range__btn">
+        <button class="default-range__yesterday" (click)="getYesterday()">Yesterday</button>
+      </div>
+    
+      <div class="default-range__btn">
+        <button class="default-range__today" (click)="getToday()">Today</button>
+      </div>
+    
+    </div>
     
 <app-chart></app-chart>
     <!-- Add spend btn -->
@@ -71,31 +97,7 @@
     </div>
 
 
-    <!-- Default date ranges -->
 
-    <div class="default-range">
-      
-      <div class="default-range__btn">
-        <button class="default-range__all-time" (click)="clearDateFilter()">All time</button>
-      </div>
-
-      <div class="default-range__btn">
-        <button class="default-range__last-month" (click)="getLastMonth()">Last month</button>
-      </div>
-
-      <div class="default-range__btn">
-        <button class="default-range__this-month" id="this-month-btn" (click)="getThisMonth()">This month</button>
-      </div>
-
-      <div class="default-range__btn">
-        <button class="default-range__yesterday" (click)="getYesterday()">Yesterday</button>
-      </div>
-
-      <div class="default-range__btn">
-        <button class="default-range__today" (click)="getToday()">Today</button>
-      </div>
-
-    </div>
 
 <!-- Expenses filter is inactive -->
     <div id="notFiltered" *ngIf="!isFilterActive" >

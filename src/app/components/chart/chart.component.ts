@@ -31,49 +31,56 @@ export class ChartComponent implements OnInit {
   ngOnInit() {
     this.pieChartContainer = document.querySelector('.pieChart');
     this.lineChartContainer = document.querySelector('.lineChart');
-    this.getSpends();
+    // this.getSpends();
     // Watch modofications
     this.Spends_Service.subject.subscribe(response => {
-      this.pieChart.destroy();
-      this.lineChart.destroy();
 
-      this.getSpends();
+      if (this.pieChart || this.lineChart) {
+        this.pieChart.destroy();
+        this.lineChart.destroy();
+      }
+
+      this.expenses = response;
+      this.getCategorySum();
+      this.getDailySpends();
+      console.log(this.expenses);
+
+
     });
 
-
   }
 
-  getSpends() {
-    this.Auth.getUserId()
-      .subscribe(
-        (value) => {
-          this.Auth.userdId = value.uid;
+  // getSpends() {
+  //   this.Auth.getUserId()
+  //     .subscribe(
+  //       (value) => {
+  //         this.Auth.userdId = value.uid;
 
-          this.Spends_Service.getSpendsFromFirebase().once('value', (snapshot) => {
+  //         this.Spends_Service.getSpendsFromFirebase().once('value', (snapshot) => {
 
-            this.expenses = this.snapshotToArray(snapshot);
-            this.getCategorySum();
-            this.getDailySpends();
+  //           this.expenses = this.snapshotToArray(snapshot);
+  //           this.getCategorySum();
+  //           this.getDailySpends();
 
-          });
-        },
-        (error) => error,
+  //         });
+  //       },
+  //       (error) => error,
 
-      );
+  //     );
 
-  }
+  // }
 
-  snapshotToArray(snapshot) {
-    const returnArr = [];
+  // snapshotToArray(snapshot) {
+  //   const returnArr = [];
 
-    snapshot.forEach((childSnapshot) => {
-      const item = childSnapshot.val();
-      item.key = childSnapshot.key;
-      returnArr.push(item);
-    });
+  //   snapshot.forEach((childSnapshot) => {
+  //     const item = childSnapshot.val();
+  //     item.key = childSnapshot.key;
+  //     returnArr.push(item);
+  //   });
 
-    return returnArr;
-  }
+  //   return returnArr;
+  // }
 
 
 
@@ -140,9 +147,10 @@ export class ChartComponent implements OnInit {
       object[date] += amount;
       return object;
     }, {});
-    this.lineChartValues = Object.values(reducedArr);
-    this.lineChartKeys = Object.keys(reducedArr);
 
+    this.lineChartKeys = Object.keys(reducedArr);
+    this.lineChartValues = Object.values(reducedArr);
+    // console.log(this.lineChartValues);
 
     if (this.lineChartValues.length > 0) {
       this.getLineChart();
@@ -159,6 +167,9 @@ export class ChartComponent implements OnInit {
       chart: {
         type: 'donut',
       },
+
+
+
       series: this.pieChartValues,
 
       labels: this.pieChartKeys
@@ -178,30 +189,54 @@ export class ChartComponent implements OnInit {
 
 
   getLineChart() {
+
+
+
     const options = {
       chart: {
         height: 350,
-        type: 'area',
+        type: 'line',
+        zoom: {
+          enabled: true
+        }
       },
       dataLabels: {
-        enabled: true
+        enabled: true,
+        style: {
+          colors: ['#519657'],
+          fontSize: '12px'
+        },
+        formatter: function (val) {
+          return val.toLocaleString('hu')  + ' Ft';
+        }
+      },
+      markers: {
+        colors: ['#519657'],
+        size: 5,
+        hover: {
+          size: 12
+        },
       },
       stroke: {
-        curve: 'smooth'
+        curve: 'smooth',
+        colors: ['#8BC34A']
       },
       series: [{
         name: 'Expenses',
         data: this.lineChartValues
       }],
-
-      xaxis: {
-        type: 'datetime',
-        categories: this.lineChartKeys,
+      title: {
+        text: 'Expenses by day',
+        align: 'left'
       },
-      tooltip: {
-        x: {
-          format: 'yy-MM-dd'
+      grid: {
+        row: {
+          colors: ['#8BC34A' , 'transparent'], // takes an array which will be repeated on columns
+          opacity: 0.2
         },
+      },
+      xaxis: {
+        categories: this.lineChartKeys,
       }
     };
 

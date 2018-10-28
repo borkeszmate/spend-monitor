@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { Subject } from 'rxjs';
+import { Subject, ReplaySubject } from 'rxjs';
 
 
 @Injectable({
@@ -13,7 +13,7 @@ export class SpendsService {
     private Auth: AuthService,
     private db: AngularFireDatabase
     ) {
-    this.subject = new Subject;
+    this.subject = new ReplaySubject;
     }
 
   addSpendToFirebase(spend) {

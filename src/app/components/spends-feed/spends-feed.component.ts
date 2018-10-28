@@ -134,8 +134,8 @@ export class SpendsFeedComponent implements OnInit {
               this.expensesLoaded = true;
               this.calculateTotalSpend(this.expenses);
               this.expensesAdded = true;
-
               this.getThisMonth();
+
 
               // Create filtered array if filtetered
               if (this.isFilterActive) {
@@ -247,7 +247,11 @@ export class SpendsFeedComponent implements OnInit {
 
 
       // Emit event to subject in order to trigger instant diagram recalculation
-      this.Spends_Service.subject.next();
+      if (this.isFilterActive) {
+        this.Spends_Service.subject.next(this.filteredExpenses);
+      } else {
+        this.Spends_Service.subject.next(this.expenses);
+      }
     })
     .catch(err => {
       console.log(err);
@@ -322,9 +326,10 @@ export class SpendsFeedComponent implements OnInit {
 
 
   clearDateFilter() {
-    // this.filteredExpenses = '';
     this.isFilterActive = false;
+    this.Spends_Service.subject.next(this.expenses);
   }
+
 
   sortByDate(expenses) {
     expenses.sort((a, b) => {
@@ -393,9 +398,10 @@ export class SpendsFeedComponent implements OnInit {
     if (this.filteredExpenses.length > 0) {
 
       this.calculateTotalSpend(this.filteredExpenses);
+      this.Spends_Service.subject.next(this.filteredExpenses);
+
     }
 
-    this.Spends_Service.subject.next();
   }
 
 }
