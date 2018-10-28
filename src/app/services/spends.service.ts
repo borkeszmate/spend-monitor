@@ -34,6 +34,7 @@ export class SpendsService {
       amount: editedSpend.amount,
       date: editedSpend.date,
       category: editedSpend.category,
+      img: editedSpend.img
     });
   }
   deleteSpendFromFirebase(key) {

@@ -39,6 +39,8 @@ export class SpendsFeedComponent implements OnInit {
     costCategories: []
   };
 
+  defaultCostCategories;
+
 // Date filter related
   editForm: FormGroup;
   editDate;
@@ -49,21 +51,6 @@ export class SpendsFeedComponent implements OnInit {
   fromDate;
   toDate;
 
-  // Dates
-  thisMonthStart: number;
-  thisMonthEnd: number;
-
-  lastMonthStart: number;
-  lastMonthEnd: number;
-
-  yesterdayStart: number;
-  yesterdayEnd: number;
-
-  todayStart: number;
-  todayEnd: number;
-
-
-  focus;
 
 
   private readonly notifier: NotifierService;
@@ -94,8 +81,7 @@ export class SpendsFeedComponent implements OnInit {
     // Create date picker form
     this.createDatePickerForm();
 
-    // this.focus = document.querySelector('.default-range__this-month');
-
+    this.defaultCostCategories = this.User_service.defaultCostCategories;
 
   }
 
@@ -150,8 +136,6 @@ export class SpendsFeedComponent implements OnInit {
               this.expensesAdded = true;
 
               this.getThisMonth();
-              console.log(this.expenses);
-
 
               // Create filtered array if filtetered
               if (this.isFilterActive) {
@@ -162,9 +146,6 @@ export class SpendsFeedComponent implements OnInit {
             } else {
               this.expensesLoaded = true;
             }
-
-            this.focus = document.querySelector('.default-range__this-month');
-
 
           });
         },
@@ -221,7 +202,8 @@ export class SpendsFeedComponent implements OnInit {
       amount: new FormControl(expense.amount, [Validators.required]),
       category: new FormControl(expense.category, [Validators.required]),
       date: new FormControl(time, [Validators.required]),
-      key: new FormControl(expense.key, [Validators.required])
+      key: new FormControl(expense.key, [Validators.required]),
+      img: new FormControl(expense.img, [Validators.required])
     });
   }
 
@@ -240,12 +222,20 @@ export class SpendsFeedComponent implements OnInit {
     let date = this.editForm.value.date;
     date = new Date(this.editForm.value.date).getTime();
     const key = this.editForm.value.key;
+
     const editedExpense = {
       amount: this.editForm.value.amount,
       category: this.editForm.value.category,
       date: date,
+      img: '../../../assets/img/Other.svg'
     };
-    // console.log(key);
+
+    this.defaultCostCategories.forEach(costCategory => {
+      if ( costCategory.name === this.editForm.value.category  ) {
+        editedExpense.img = costCategory.img;
+      }
+    });
+
     this.Spends_Service.editSpendInFirebase(key, editedExpense)
     .then(response => {
 
