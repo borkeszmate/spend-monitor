@@ -19,22 +19,27 @@ export class ChartComponent implements OnInit {
     expenses;
     pieChartKeys;
     pieChartValues;
+    pieChart;
     pieChartContainer;
-    chart;
 
+    lineChartKeys;
+    lineChartValues;
+    lineChartContainer;
+    lineChart;
 
 
   ngOnInit() {
     this.pieChartContainer = document.querySelector('.pieChart');
+    this.lineChartContainer = document.querySelector('.lineChart');
     this.getSpends();
     // Watch modofications
     this.Spends_Service.subject.subscribe(response => {
-      this.chart.destroy();
+      this.pieChart.destroy();
+      this.lineChart.destroy();
 
       this.getSpends();
     });
 
-    const date = new Date;
 
   }
 
@@ -48,6 +53,7 @@ export class ChartComponent implements OnInit {
 
             this.expenses = this.snapshotToArray(snapshot);
             this.getCategorySum();
+            this.getDailySpends();
 
           });
         },
@@ -69,26 +75,7 @@ export class ChartComponent implements OnInit {
     return returnArr;
   }
 
-  getChart() {
-    const options = {
-      chart: {
-        type: 'donut',
-      },
-      series: this.pieChartValues,
 
-      labels: this.pieChartKeys
-
-
-    };
-
-    this.chart = new ApexCharts (
-
-      document.querySelector('#chart'),
-      options
-    );
-
-    this.chart.render();
-  }
 
   getCategorySum() {
     const expensesArr = [];
@@ -115,11 +102,116 @@ export class ChartComponent implements OnInit {
     }, {});
 
 
+
     this.pieChartKeys = Object.keys(reducedArr);
     this.pieChartValues = Object.values(reducedArr);
     if (this.pieChartValues.length > 0) {
-      this.getChart();
+      this.getPieChart();
     }
+  }
+
+  getDailySpends() {
+    const spendByDayArr = [];
+    this.expenses.forEach(spend => {
+      const spendByDayArrItem = {
+        date : '',
+        amount : null
+      };
+      const year = new Date(spend.date).getFullYear();
+      const month = new Date(spend.date).getMonth();
+      const day = new Date(spend.date).getDate();
+      spendByDayArrItem.date = `${year}-${month}-${day}`;
+      spendByDayArrItem.amount = spend.amount;
+
+
+      spendByDayArr.push(spendByDayArrItem);
+
+    });
+
+
+
+    const reducedArr = spendByDayArr.reduce((object, item) => {
+      const date = item.date;
+      const amount = item.amount;
+
+      if (!object.hasOwnProperty(date)) {
+        object[date] = 0;
+      }
+      object[date] += amount;
+      return object;
+    }, {});
+    this.lineChartValues = Object.values(reducedArr);
+    this.lineChartKeys = Object.keys(reducedArr);
+
+
+    if (this.lineChartValues.length > 0) {
+      this.getLineChart();
+    }
+
+
+  }
+
+
+
+
+  getPieChart() {
+    const options = {
+      chart: {
+        type: 'donut',
+      },
+      series: this.pieChartValues,
+
+      labels: this.pieChartKeys
+
+
+    };
+
+    this.pieChart = new ApexCharts(
+
+      document.querySelector('#chart'),
+      options
+    );
+
+    this.pieChart.render();
+  }
+
+
+
+  getLineChart() {
+    const options = {
+      chart: {
+        height: 350,
+        type: 'area',
+      },
+      dataLabels: {
+        enabled: true
+      },
+      stroke: {
+        curve: 'smooth'
+      },
+      series: [{
+        name: 'Expenses',
+        data: this.lineChartValues
+      }],
+
+      xaxis: {
+        type: 'datetime',
+        categories: this.lineChartKeys,
+      },
+      tooltip: {
+        x: {
+          format: 'yy-MM-dd'
+        },
+      }
+    };
+
+    this.lineChart = new ApexCharts(
+      document.querySelector('#lineChart'),
+      options
+    );
+
+    this.lineChart.render();
+
   }
 
 

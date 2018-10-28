@@ -101,7 +101,7 @@ export class AddSpendComponent implements OnInit {
       this.spend.img = '../../../assets/img/Other.svg';
 
     }
-    console.log(this.spend);
+
 
 
     this.Spends_Service.addSpendToFirebase(this.spend)

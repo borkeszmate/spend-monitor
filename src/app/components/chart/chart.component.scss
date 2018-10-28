@@ -1,8 +1,8 @@
 // @import '../../../styles.scss';
 
-.pieChart{
+.lineChart{
  width: 100%;
-
+ 
  text-align: center;
  margin-bottom: 5rem;
  h2{
@@ -12,8 +12,33 @@
   height: 100%;
  }
  #chart{
-  // background-color: red;
   width: 40%;
+  // background-color: red;
+  margin: 2rem auto;
+  
+  @media only screen and (max-width:50em) {
+  width: 100%; 
+   
+  }
+ }
+ 
+}
+
+
+.pieChart{
+ width: 100%;
+ 
+ text-align: center;
+ margin-bottom: 5rem;
+ h2{
+  font-size: 3rem;
+ }
+ @media only screen and (max-width:50em) {
+  height: 100%;
+ }
+ #chart{
+  width: 40%;
+  // background-color: red;
   margin: 2rem auto;
   
   @media only screen and (max-width:50em) {
