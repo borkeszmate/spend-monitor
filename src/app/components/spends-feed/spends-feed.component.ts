@@ -132,7 +132,6 @@ export class SpendsFeedComponent implements OnInit {
               this.sortByDate(this.expenses);
               this.starterExpenses = this.expenses;
               this.expensesLoaded = true;
-              this.calculateTotalSpend(this.expenses);
               this.expensesAdded = true;
               this.getThisMonth();
 
@@ -328,6 +327,7 @@ export class SpendsFeedComponent implements OnInit {
   clearDateFilter() {
     this.isFilterActive = false;
     this.Spends_Service.subject.next(this.expenses);
+    this.calculateTotalSpend(this.expenses);
   }
 
 
@@ -400,6 +400,9 @@ export class SpendsFeedComponent implements OnInit {
       this.calculateTotalSpend(this.filteredExpenses);
       this.Spends_Service.subject.next(this.filteredExpenses);
 
+    } else {
+      console.log(this.filteredExpenses);
+      this.Spends_Service.subject.next(null);
     }
 
   }

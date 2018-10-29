@@ -15,12 +15,12 @@ export class ChartComponent implements OnInit {
     private Auth: AuthService,
     private Spends_Service: SpendsService,
   ) { }
-    showChart = false;
     expenses;
     pieChartKeys;
     pieChartValues;
     pieChart;
     pieChartContainer;
+    chartsContainer;
 
     lineChartKeys;
     lineChartValues;
@@ -31,20 +31,28 @@ export class ChartComponent implements OnInit {
   ngOnInit() {
     this.pieChartContainer = document.querySelector('.pieChart');
     this.lineChartContainer = document.querySelector('.lineChart');
+    this.chartsContainer = document.querySelector('.chartsContainer');
     // this.getSpends();
     // Watch modofications
     this.Spends_Service.subject.subscribe(response => {
+      console.log(response);
+      if (response === null ) {
 
-      if (this.pieChart || this.lineChart) {
-        this.pieChart.destroy();
-        this.lineChart.destroy();
+        console.log('eltűnik');
+        this.chartsContainer.style.display = 'none';
+
+      } else {
+
+
+        if (this.pieChart || this.lineChart) {
+          this.pieChart.destroy();
+          this.lineChart.destroy();
+        }
+        this.expenses = response;
+        this.getCategorySum();
+        this.getDailySpends();
+        this.chartsContainer.style.visibility = 'block';
       }
-
-      this.expenses = response;
-      this.getCategorySum();
-      this.getDailySpends();
-      console.log(this.expenses);
-
 
     });
 
