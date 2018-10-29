@@ -54,14 +54,14 @@
 
 .expense-date-filter{
 
-  margin: 0rem auto;
+  margin: 15rem auto 0rem auto;
   font-size: 1.5rem;
   padding: 2rem 0;
   width: 70%;
   cursor: pointer;
   text-align: right;
   mat-datepicker-toggle{
-    font-size: 7rem;
+    font-size: 4rem;
     
 
   }
@@ -87,13 +87,14 @@
 }
 
 .default-range{
-  margin: 3rem auto;
+  margin: 5rem auto 10rem auto;
   width: 70%;
   display: flex;
 
   @media only screen and (max-width:50em) {
     width: 97%;
     padding: 2rem 0;
+      margin: 5rem auto 13rem auto;
   }
 
   &__btn{

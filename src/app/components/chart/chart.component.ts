@@ -35,10 +35,10 @@ export class ChartComponent implements OnInit {
     // this.getSpends();
     // Watch modofications
     this.Spends_Service.subject.subscribe(response => {
-      console.log(response);
+
       if (response === null ) {
 
-        console.log('eltűnik');
+      
         this.chartsContainer.style.display = 'none';
 
       } else {
@@ -48,10 +48,12 @@ export class ChartComponent implements OnInit {
           this.pieChart.destroy();
           this.lineChart.destroy();
         }
+
         this.expenses = response;
+        console.log(this.expenses);
+        this.chartsContainer.style.display = 'block';
         this.getCategorySum();
         this.getDailySpends();
-        this.chartsContainer.style.visibility = 'block';
       }
 
     });

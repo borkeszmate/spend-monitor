@@ -13,7 +13,7 @@ export class SpendsService {
     private Auth: AuthService,
     private db: AngularFireDatabase
     ) {
-    this.subject = new ReplaySubject;
+    this.subject = new ReplaySubject();
     }
 
   addSpendToFirebase(spend) {
