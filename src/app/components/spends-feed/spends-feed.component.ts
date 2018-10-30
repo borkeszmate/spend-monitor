@@ -9,7 +9,7 @@ import { FormGroup, FormControl, Validators, FormsModule } from '@angular/forms'
 
 // Notification
 import { NotifierService } from 'angular-notifier';
-import { getLocaleTimeFormat } from '@angular/common';
+
 
 
 
@@ -268,7 +268,11 @@ export class SpendsFeedComponent implements OnInit {
       this.editToggle('');
       this.getSpends();
       // Emit event to subject in order to trigger instant diagram recalculation
-      this.Spends_Service.subject.next();
+      if (this.isFilterActive) {
+        this.Spends_Service.subject.next(this.filteredExpenses);
+      } else {
+        this.Spends_Service.subject.next(this.expenses);
+      }
 
     })
     .catch(err => {

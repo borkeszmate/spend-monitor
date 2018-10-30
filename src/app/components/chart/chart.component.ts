@@ -50,7 +50,7 @@ export class ChartComponent implements OnInit {
         }
 
         this.expenses = response;
-        console.log(this.expenses);
+        // console.log(this.expenses);
         this.chartsContainer.style.display = 'block';
         this.getCategorySum();
         this.getDailySpends();
@@ -128,26 +128,35 @@ export class ChartComponent implements OnInit {
   }
 
   getDailySpends() {
-    const spendByDayArr = [];
+    let spendByDayArr = [];
     this.expenses.forEach(spend => {
       const spendByDayArrItem = {
         date : '',
-        amount : null
+        amount : null,
+        millisecs : spend.date
       };
       const year = new Date(spend.date).getFullYear();
       const month = new Date(spend.date).getMonth();
       const day = new Date(spend.date).getDate();
+
       spendByDayArrItem.date = `${year}-${month}-${day}`;
       spendByDayArrItem.amount = spend.amount;
 
 
       spendByDayArr.push(spendByDayArrItem);
 
+      
+
+      
+    });
+
+    
+    spendByDayArr = spendByDayArr.sort((a, b) => {
+      return a.millisecs - b.millisecs;
     });
 
 
-
-    const reducedArr = spendByDayArr.reduce((object, item) => {
+    let reducedArr = spendByDayArr.reduce((object, item) => {
       const date = item.date;
       const amount = item.amount;
 
@@ -157,6 +166,9 @@ export class ChartComponent implements OnInit {
       object[date] += amount;
       return object;
     }, {});
+
+
+   
 
     this.lineChartKeys = Object.keys(reducedArr);
     this.lineChartValues = Object.values(reducedArr);
