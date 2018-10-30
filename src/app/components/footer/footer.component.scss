@@ -11,6 +11,10 @@
   margin: 8rem auto;
   // background-color: red;
   justify-content: space-between;
+  @media only screen and (max-width: 50em) {
+     flex-direction: column;
+     margin: 3rem auto;
+  }
   
   &__title{
    display: flex;
@@ -18,13 +22,25 @@
    text-align: center;
    font-size: 3rem;
    color: white;
+   @media only screen and (max-width: 50em) {
+    margin: 2rem auto ;
+    font-size: 5rem;
+    }
 
   }
   &__img{
    display: flex;
    align-items: center;
+
+   @media only screen and (max-width: 50em) {
+     flex-direction: column;
+   }
    img{
-    height: 5rem;
+    height: 4rem;
+    margin: 0 1.5rem;
+    @media only screen and (max-width: 50em) {
+     margin: 1rem 0;
+   }
    }
   }
  }

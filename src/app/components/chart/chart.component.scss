@@ -1,10 +1,14 @@
 // @import '../../../styles.scss';
 
 .lineChart{
- width: 100%;
- 
- text-align: center;
- margin-bottom: 5rem;
+  width: 95%;
+  margin: 0 auto;
+  padding: 2rem 0;
+  background-color: white;
+  text-align: center;
+  margin-bottom: 5rem;
+  border-radius: 12px;
+  box-shadow: 8px 9px 5px -5px rgba(0,0,0,0.15);
  h2{
   font-size: 3rem;
  }
@@ -26,10 +30,12 @@
 
 
 .pieChart{
- width: 100%;
- 
- text-align: center;
- margin-bottom: 5rem;
+  width: 95%;
+  border-radius: 12px;
+  box-shadow: 8px 9px 5px -5px rgba(0,0,0,0.15);
+  text-align: center;
+  margin: 0rem auto 5rem auto;
+  background-color: white;
  h2{
   font-size: 3rem;
  }

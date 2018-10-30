@@ -26,12 +26,27 @@
 
 
   <div class="container" *ngIf="expensesLoaded && expensesAdded">
+    
+    
     <div class="balance-total">
+        <!-- Current date display  -->
+        <div class="current-date-range" *ngIf="!isFilterActive">
+          <h4>Selected date range:</h4>
+          <h3>All time</h3>
+        </div>
+        
+        <div class="current-date-range" *ngIf="isFilterActive">
+          <h4>Selected date range:</h4>
+          <h3>{{fromDate | date: 'yyyy.MM.dd.'}} to {{toDate | date: 'yyyy.MM.dd.'}}</h3>
+          
+        </div>
       <div class="balance-total__spend">
-        <h1>Your total spend: {{totalSpend | currency : 'HUF' : 'symbol' : '1.0' }}</h1>
+        <h5>Your total spend: <span>{{totalSpend | currency : 'HUF' : 'symbol' : '1.0' }}</span> </h5>
 
       </div>
     </div>
+
+   
 
     
     <!-- Default date ranges -->
@@ -59,7 +74,8 @@
       </div>
     
     </div>
-    
+
+   
 <app-chart></app-chart>
     <!-- Add spend btn -->
   <div class="add-spend" (click)="addSpendRoute()">

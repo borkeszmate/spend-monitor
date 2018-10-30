@@ -408,6 +408,7 @@ export class SpendsFeedComponent implements OnInit {
     } else {
       // console.log(this.filteredExpenses);
       this.Spends_Service.subject.next(null);
+      this.totalSpend = 0;
     }
 
   }

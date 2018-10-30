@@ -190,6 +190,8 @@ export class ChartComponent implements OnInit {
         type: 'donut',
       },
 
+      colors: ['#8BC34A', '#519657', '#b2fab4', '#393f4d', '#FF4136', '#0074D9' ],
+
 
 
       series: this.pieChartValues,
