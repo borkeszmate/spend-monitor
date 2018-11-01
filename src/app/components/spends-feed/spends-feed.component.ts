@@ -176,20 +176,20 @@ export class SpendsFeedComponent implements OnInit {
    editToggle(expense) {
     this.editToggler = !this.editToggler;
 
-    if (this.editToggler === false) {
-      // Closing
-      this.editArea.style.transform = 'translateX(100%)';
-      this.editDate.style.display = 'none';
-      this.EditDateToggler.style.display = 'block';
 
-    } else {
-      // Opening
       this.createEditForm(expense);
       this.editArea.style.transform = 'translateX(0)';
       this.openedExpense = expense;
 
     }
-  }
+
+    closeEdit() {
+      this.editToggler = false;
+      this.editArea.style.transform = 'translateX(100%)';
+      this.editDate.style.display = 'none';
+      this.EditDateToggler.style.display = 'block';
+
+    }
 
 
 
