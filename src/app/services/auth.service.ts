@@ -49,6 +49,7 @@ export class AuthService {
   }
 
   signOut() {
+    this.isLoggedIn = false;
     this.afAuth.auth.signOut();
   }
 
@@ -85,10 +86,12 @@ export class AuthService {
        if (observer != null) {
         //  console.log('loggedin');
 
+        this.isLoggedIn = true;
         return true;
 
        } else {
         //  console.log('off');
+         this.isLoggedIn = false;
          this.router.navigate(['login']);
          return false;
        }

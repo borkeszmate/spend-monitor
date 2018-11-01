@@ -127,7 +127,7 @@ export class LoginComponent implements OnInit {
   // Login with Google
 
   googleLogin() {
-    console.log('google click');
+    // console.log('google click');
     const provider = new auth.GoogleAuthProvider();
     return this.oAuthLogin(provider);
   }
@@ -141,6 +141,7 @@ export class LoginComponent implements OnInit {
       .subscribe(user => {
         const userId = user.uid;
 // Check if user node exists in db. If not create.
+// @ts-ignore
         if (this.User_service.checkIfUserExist(userId)) {
           this.notifier.notify('success', `Hi! You have successfully logged in as ${credentials.user.displayName}`);
           this.router.navigate(['']);

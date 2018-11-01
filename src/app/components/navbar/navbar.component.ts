@@ -26,6 +26,8 @@ export class NavbarComponent implements OnInit {
 
 
 
+
+
   }
 
   public navClick() {

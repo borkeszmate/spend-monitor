@@ -86,7 +86,7 @@ export class AddSpendComponent implements OnInit {
 
 
 
-  addSubmit(i) {
+  addSubmit() {
 
     this.spend.amount = this.addForm.value.amount;
     this.spend.category = this.addForm.value.category;

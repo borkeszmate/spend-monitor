@@ -7,18 +7,17 @@
     <button class="btn-primary" [routerLink]="['/']" routerLinkActive="router-link-active" >Back to homapage</button>
     <div class="title" >
       
-      <h2 >Gave away some money?</h2>
       <h1>Record it here and keep tracking your spends!</h1>
     </div>
     
     
     <form [formGroup]="addForm" (ngSubmit)="addSubmit()" class="add-spend__form">
       <!-- Amount input -->
-      <label for="amount">How much did you spend?</label>
+      <label for="amount" class="add-spend__form__label">How much did you spend?</label>
       <input name="amount" type="number" placeholder="1500" formControlName="amount" class="add-spend__form__input-text">
       
       <!-- Category input -->
-      <h2>Select a category</h2>
+      <h2 class="add-spend__form__label">Select a category</h2>
       <!-- Loading spinnger -->
       <div class="spinner" *ngIf="!isCategoriesLoaded">
           <h4>Loading categories...</h4>

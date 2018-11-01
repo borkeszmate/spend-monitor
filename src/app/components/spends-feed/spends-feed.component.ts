@@ -209,7 +209,7 @@ export class SpendsFeedComponent implements OnInit {
 
 
 // Edit form
-  toggleEditDate(e) {
+  toggleEditDate() {
 
     this.editDate.style.display = 'block';
     this.EditDateToggler.style.display = 'none';

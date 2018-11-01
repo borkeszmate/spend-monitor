@@ -35,6 +35,11 @@
     padding: 2rem;
     width: 60%;
 
+    &__label{
+      color: white;
+      font-size: 3rem;
+    }
+
     @media only screen and (max-width:50em) {
       width:100%;
     }
