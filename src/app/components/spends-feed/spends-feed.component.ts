@@ -400,7 +400,7 @@ export class SpendsFeedComponent implements OnInit {
     this.createFilteredExpensesArray(this.expenses, this.fromDate, this.toDate);
     this.sortByDate(this.filteredExpenses);
     if (this.filteredExpenses.length > 0) {
-      
+
       this.calculateTotalSpend(this.filteredExpenses);
       // console.log(this.filteredExpenses);
       this.Spends_Service.subject.next(this.filteredExpenses);

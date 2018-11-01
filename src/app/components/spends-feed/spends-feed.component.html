@@ -5,10 +5,10 @@
   <img src="../../../assets/img/loader.gif" alt="">
 </div>
 
-  <div class="container" *ngIf="!expensesAdded">
+  <div class="container" *ngIf="!expensesAdded && expensesLoaded">
     <div class="balance-total">
       <div class="balance-total__spend">
-        <h1>No spend to show yet! Click on add spends!</h1>
+        <h4>No spend to show yet! Click on add spends!</h4>
   
       </div>
     </div>
@@ -213,9 +213,11 @@
           <h6>Date</h6>
           <input type="date" formControlName="date" value="{{openedExpense?.date | date: 'yyyy.MM.dd' }}">
         </div>
-        <input type="hidden" value="openedExpense.key" formControlName="key" >
         <div class="edit__form__btns">
-          <input type="submit" class="btn-primary" (click)="saveEditedExpense()"  value="Save changes" [disabled]="!editForm.valid">
+
+        <input type="hidden" value="openedExpense.key" formControlName="key">
+
+          <button type="submit" class="btn-primary" (click)="saveEditedExpense()"  value="Save changes" [disabled]="!editForm.valid">Save changes</button>
           
           <button class="btn-danger" (click)="deleteSpend(openedExpense.key)" >Delete spend</button>
         </div>

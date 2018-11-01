@@ -347,9 +347,12 @@
       }
     }
     &__btns{
-      input{
-        margin-right: 2rem;
-      }
+     button{
+       margin-right: 2rem;
+       @media only screen and (max-width: 50em) {
+         margin: 2rem auto;
+       }
+     } 
     }
   }
 }

@@ -33,9 +33,11 @@
   @media only screen and (max-width: 50em) {
   display: block;      
   text-align: center;
-  margin: .4rem auto;
+  margin: 1rem auto;
   width: 95%;
   }    
+
+
 }
 
 .btn-info{
@@ -50,9 +52,9 @@
  box-shadow: 8px 9px 5px -5px rgba(0,0,0,0.15);
  cursor: pointer;
   @media only screen and (max-width: 50em) {
-  // display: block;      
+  display: block;      
   text-align: center;
-  // margin: .4rem auto;
+  margin: 1rem auto;
   width: 95%;
   }    
 }
@@ -71,7 +73,7 @@
   @media only screen and (max-width: 50em) {
   display: block;      
   text-align: center;
-  margin: .4rem auto;
+  margin: 1rem auto;
   width: 95%;
   }    
 }
