@@ -78,7 +78,7 @@ export class AuthService {
 
   checkIfLoggedIn() {
 
-   const subscription = this.afAuth.authState.subscribe(response => {
+    this.afAuth.authState.subscribe(response => {
 
     const observer = response;
     //  console.log(authState);

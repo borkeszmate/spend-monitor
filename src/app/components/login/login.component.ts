@@ -141,16 +141,28 @@ export class LoginComponent implements OnInit {
       .subscribe(user => {
         const userId = user.uid;
 // Check if user node exists in db. If not create.
-// @ts-ignore
-        if (this.User_service.checkIfUserExist(userId)) {
-          this.notifier.notify('success', `Hi! You have successfully logged in as ${credentials.user.displayName}`);
-          this.router.navigate(['']);
 
-        } else {
-          this.User_service.addUserToFirebase();
-          this.notifier.notify('success', `Hi! You have successfully logged in as ${credentials.user.displayName}`);
-          this.router.navigate(['']);
-        }
+        this.User_service.checkIfUserExist(userId).then(snapshot => {
+          let isUserExists;
+          if (snapshot.val() != null) {
+             isUserExists = true;
+          } else {
+             isUserExists = false;
+          }
+
+          if (isUserExists) {
+            this.notifier.notify('success', `Hi! You have successfully logged in as ${credentials.user.displayName}`);
+            this.router.navigate(['']);
+            // console.log('belogol, mint régi user');
+
+          } else {
+            this.User_service.addUserToFirebase();
+            this.notifier.notify('success', `Hi! You have successfully logged in as ${credentials.user.displayName}`);
+            this.router.navigate(['']);
+            // console.log('belogol, mint új user');
+          }
+        });
+
     });
   }
     )
